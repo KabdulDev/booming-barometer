@@ -1,0 +1,28 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Client Side Exclusions
+
+# dependencies
+/client-side/node_modules
+/client-side/.pnp
+/client-side/.pnp.js
+
+# testing
+/client-side/coverage
+
+# production
+/client-side/build
+
+# server-side exclusions
+/server-side/node_modules
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
