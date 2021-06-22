@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Nav from './Components/Navigation'
 import Footer from './Components/Footer'
+import Info from './Views/Info'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Nav />
-    <App />
-    <Footer />
+      <Nav />
+      <main className="d-flex flex-column vh-100">
+        <Info />
+      </main>
+      <Footer />
   </React.StrictMode>,
   document.getElementById('root')
 );
