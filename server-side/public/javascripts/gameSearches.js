@@ -61,7 +61,27 @@ var getTopSearchesForGameName= async (gameName, displayNum) => {
     return searchReturns;
 }
 
-var get
+var gameSearchLinkClicked = async(type, term, appID) => {
+    gameSearchLinkClicked.sync();
+    let game = await gt.getGameAppId(appID);
+    let search = await st.getSearch(type, term);
+    let gSIncrement = await gameSearches.findOne({
+        where: {
+            gamesId: game.id,
+            searchId: search.id
+        }
+    })
+    game.increment('totalTimesClicked');
+    return game;
+}
+
+// var get
+
+module.exports = {
+    gameSearches: gameSearches,
+    getTopSearchesForGameName: getTopSearchesForGameName,
+    gameSearchLinkClicked: gameSearchLinkClicked
+}
 
 
 

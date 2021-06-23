@@ -4,14 +4,6 @@ require(`dotenv`).config();
 var axios = require(`axios`);
 var Sequelize = require (`sequelize`);
 
-// const DB_PASS = process.env.DB_PASS;
-// const DB_PORT= process.env.DB_PORT;
-// const DB_USER= process.env.DB_USER;
-// const DB_NAME= process.env.DB_NAME;
-
-// var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@localhost:${DB_PORT}/${DB_NAME}`)
-
-
 async function games() {
     const allGamesResponse = await axios.get(`https://api.steampowered.com/ISteamApps/GetAppList/v2/`);
     // console.log(allGames);
@@ -19,12 +11,6 @@ async function games() {
     const allGames = allGamesResponse.data.applist.apps
     return allGames;
 };
-
-
-// let Games = games();
-
-// console.log(Games);
-// console.log(Games.data);
 
 async function searchGames(name) {
 
