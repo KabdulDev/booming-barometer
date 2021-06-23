@@ -1,6 +1,7 @@
 require(`dotenv`).config();
 
 var Sequelize = require (`sequelize`);
+var gt = require(`./gameTable`);
 
 const DB_PASS = process.env.DB_PASS;
 const DB_PORT= process.env.DB_PORT;
@@ -75,8 +76,22 @@ var searchInsertOrUpdate = (type, term) => {
     }
 }
 
+var showAllSearches = () => {
+    searches.sync();
+    let allSearches = await searches.findall({
+        where: {
+            searchCount: {
+                [Op.gte]: 1
+            }
+        }
+    })
+    return allSearches;
+}
+
+
 module.exports = {
     searches: searches,
     newSearch: newSearch,
-    searchInsertOrUpdate: searchInsertOrUpdate
+    searchInsertOrUpdate: searchInsertOrUpdate,
+    showAllSearches: showAllSearches
 }

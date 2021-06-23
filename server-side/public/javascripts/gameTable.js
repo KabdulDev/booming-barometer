@@ -1,6 +1,7 @@
 require(`dotenv`).config();
 
 var Sequelize = require (`sequelize`);
+var st = require(`./searchTable`);
 
 const DB_PASS = process.env.DB_PASS;
 const DB_PORT= process.env.DB_PORT;
@@ -20,29 +21,87 @@ var seshBegin = () => {
 }
 
 var games = sequelize.define('game', {
-    searchType: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            customValidator (value) {
-                let validSearchTypes = ["name", "tag"]
-                if ( !(validSearchTypes.includes(value)) ){
-                    console.log("Must be a valid search type");
-                }
-            }
-        }
-
-    },
-    searchTerm: {
-        type: Sequelize.STRING,
+    steamAppId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
     },
-    searchCount: {
-        type: Sequelize.INTEGER,
+    
+    name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 1
+    },
+    totalTimesClicked: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    totalSteamStoreLinkClicked: {
+        type: Sequelize.INTEGER,
+        defaultValue:0
     }
-
-
 });
+
+
+var getGameNames = async (gName) => {
+    games.sync();
+    let gameNames = await games.findAll({
+        where: {
+            name: {
+            [Op.substring]:gName
+            }
+        }       
+    })
+    return gameNames;
+}
+
+var getGameName = async (gName) => {
+    games.sync();
+    let gameName = await games.findOne({
+        where: {
+            name: gName
+        }       
+    })
+    return gameName;
+}
+
+var getGameAppID = async (appID) => {
+    games.sync();
+    let gameName = await games.findOne({
+        where: {
+            steamAppId: appID
+        }
+    })
+    return gameName;
+}
+
+var gameLinkClicked = async(appID) => {
+    games.sync();
+    let game = await games.findOne({
+        where: {
+            steamAppId: appID
+        }
+    })
+    game.increment('totalTimesClicked');
+    return game;
+}
+
+var gameSteamLinkClicked = async(appID) => {
+    games.sync();
+    let game = await games.findOne({
+        where: {
+            steamAppId: appID
+        }
+    })
+    game.increment('totalSteamStoreLinkClicked');
+    return game;
+}
+
+module.exports = {
+    seshBegin: seshBegin,
+    games: games,
+    getGameNames: getGameNames,
+    getGameName: getGameName,
+    getGameAppID: getGameAppID,
+    gameLinkClicked: gameLinkClicked,
+    gameSteamLinkClicked: gameSteamLinkClicked
+}
