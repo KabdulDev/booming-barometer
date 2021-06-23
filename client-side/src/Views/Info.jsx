@@ -1,12 +1,25 @@
+import './App.css';
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 
 export default class Info extends Component
 {
+
+    handleOnSubmit = (e) =>
+    {
+        e.preventDefault();
+        const searchField = document.getElementById("searchGames").value
+        console.log(searchField)
+    }
+
+
     render()
     {
         return (
@@ -17,6 +30,22 @@ export default class Info extends Component
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
                 </Jumbotron>
+                
+                <Form onSubmit={this.handleOnSubmit}>
+                <Row className="mt-2 mb-5 justify-content-center">
+                    <Col xs={6} md={4}>
+                        <input type="text" className="form-control" placeholder="Search for (whatever)" id="searchGames"/>
+                    </Col>
+
+                    <Col xs={2}>
+                        <button className="btn-search">Search</button>
+                    </Col>
+                </Row>
+                </Form>
+
+                <Row>
+
+                </Row>
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
@@ -28,7 +57,7 @@ export default class Info extends Component
                     </thead>
                     <tbody>
                         <tr>
-                        <td>1</td>
+                            <td>1</td>
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>@mdo</td>

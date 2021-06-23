@@ -1,20 +1,28 @@
-import './App.css';
-import Jumbotron from 'react-bootstrap/Jumbotron'
-import Container from 'react-bootstrap/Container'
+import Navigation from "./Components/Navigation";
+import Footer from './Components/Footer'
+import Home from "./Views/Home";
+import Info from "./Views/Info";
+import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 
-function App()
-{
+function App() {
     return (
-        
-        <Container>
-            <Jumbotron className="mt-5">
-                <h1>Welcome Everyone</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
-            </Jumbotron>
+        <Router>
+            <Navigation />
+            <div className="vh-100">
+                <Switch>
+                    <Route path="/" exact>
+                        <Home />
+                    </Route>
+                    <Route path="/info" exact>
+                        <Info />
+                    </Route>
+                </Switch>
+            </div>
+            <Footer />
+    </Router>
 
-            <h2>Do some fancy CSS and JS here with some type of effect</h2>
-        </Container>
+
+
 
     );
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Style/Nav.css'
+import './Style/Components.css'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
@@ -25,9 +25,9 @@ export default class Navigation extends Component
                     </Nav>
 
                     <Nav className="ml-auto">
-                        <Nav.Link href="#home"><Button variant="outline-info">Home</Button></Nav.Link>
-                        <Nav.Link href="#home"><Button variant="outline-info">Link 2</Button></Nav.Link>
-                        <Nav.Link href="#home"><Button variant="outline-info">Link 3</Button></Nav.Link>
+                        <Nav.Link href="/"><Button variant="outline-info">Home</Button></Nav.Link>
+                        <Nav.Link href="/info"><Button variant="outline-info">Info</Button></Nav.Link>
+                        {/* <Nav.Link href="#home"><Button variant="outline-info">Link 3</Button></Nav.Link> */}
                     </Nav>
                     
                     </Container>
