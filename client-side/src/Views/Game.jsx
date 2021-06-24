@@ -20,6 +20,7 @@ export default class Game extends Component
         {
             id: "",
             game: {},
+            click: 0
 
         }
     }
@@ -34,7 +35,7 @@ export default class Game extends Component
         try
         {
             const res = await axios.get(`http://localhost:3001/game/steam/id=${value}`);
-            const game = res.data.[value].data;
+            const game = res.data.[value].data
             
             this.setState({game: game, id: value})
         }
@@ -48,8 +49,11 @@ export default class Game extends Component
 
     handleOnClick = async () =>
     {
-
+        let click = this.state.click
+        click = click + 1;
         //record click and insert into backend/database
+        this.setState({click: click})
+        console.log(click)
         const steamID = this.state.id;
         window.open(`https://store.steampowered.com/app/${steamID}`);
     }
