@@ -62,7 +62,7 @@ var getTopSearchesForGameName= async (gameName, displayNum) => {
 }
 
 var gameSearchLinkClicked = async(type, term, appID) => {
-    gameSearchLinkClicked.sync();
+    gameSearches.sync();
     let game = await gt.getGameAppId(appID);
     let search = await st.getSearch(type, term);
     let gSIncrement = await gameSearches.findOne({
@@ -72,7 +72,23 @@ var gameSearchLinkClicked = async(type, term, appID) => {
         }
     })
     game.increment('totalTimesClicked');
-    return game;
+    gSIncrement.increment(`searchGamestimesClicked`);
+    return gSIncrement;
+}
+
+var gameSearchStoreLinkClicked = async(type, term, appID) => {
+    gameSearches.sync();
+    let game = await gt.getGameAppId(appID);
+    let search = await st.getSearch(type, term);
+    let gSIncrement = await gameSearches.findOne({
+        where: {
+            gamesId: game.id,
+            searchId: search.id
+        }
+    })
+    game.increment('totalSteamStoreLinkClicked');
+    gSIncrement.increment(`searchGamessteamStoreLinkClicked`);
+    return gSIncrement;
 }
 
 // var get
@@ -80,7 +96,8 @@ var gameSearchLinkClicked = async(type, term, appID) => {
 module.exports = {
     gameSearches: gameSearches,
     getTopSearchesForGameName: getTopSearchesForGameName,
-    gameSearchLinkClicked: gameSearchLinkClicked
+    gameSearchLinkClicked: gameSearchLinkClicked,
+    gameSearchStoreLinkClicked: gameSearchStoreLinkClicked
 }
 
 

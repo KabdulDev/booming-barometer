@@ -57,21 +57,39 @@ router.get(`/game/id=:appId`, async function (req, res) {
   })
 })
 
-router.post(`/game/searchtype=:type`)
+router.post(`/searchtype=:type/term=:term`, function (req, res){
+  let type = req.params.type;
+  let term = req.params.term;
+  console.log(`Request received for /searchtype=${type}/term=${term}`);
+
+  search.searchInsertOrUpdate(type,term);
+
+})
 
 //referenced https://stackoverflow.com/questions/41736413/multiple-optional-route-parameters-in-express
 //use when link is clicked from search
-router.post(`/searchtype=:type/term=:term/appId=:appId`, function(req, res){
+router.post(`/searchtype=:type/term=:term/appId=:appId/gameClick`, function(req, res){
   let type = req.params.type;
   let term = req.params.term;
   let appId = req.params.appId;
   console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
 
-  game.gameLinkClicked(appId);
   gameSearch.gameSearchLinkClicked(type,term,appId)
 
+});
 
-})
+
+router.post(`/searchtype=:type/term=:term/appId=:appId/storeClick`, function(req, res){
+  let type = req.params.type;
+  let term = req.params.term;
+  let appId = req.params.appId;
+  console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
+
+  gameSearch.gameSearchStoreLinkClicked(type,term,appId)
+
+});
+
+
 
 
 
