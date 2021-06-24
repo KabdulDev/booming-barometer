@@ -18,11 +18,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get(`/games/term=:gName`, async function (req, res) {
+router.get(`/games/term=:gName/limit=:limit`, async function (req, res) {
   let gName = req.params.gName;
-  console.log(`Request received for /games/${gName}`);
+  let limit = req.params.limit;
+  console.log(`Request received for /games/term=${gName}/limit=${limit}`);
 
-  const games = await game.getGameNames(gName, function(err, results){
+  const games = await game.getGameNames(gName,limit, function(err, results){
     if(err){
       console.log(err.stack);
     }

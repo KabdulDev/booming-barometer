@@ -33,11 +33,11 @@ let gameSearches = sequelize.define(`GameSearches`, {
             key: 'id'
           }
     },
-    searchGamestimesClicked: {
+    searchGamesTimesClicked: {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
-    searchGamessteamStoreLinkClicked: {
+    searchGamesSteamStoreLinkClicked: {
         type: Sequelize.INTEGER,
         defaultValue:0
     }
@@ -72,7 +72,7 @@ var gameSearchLinkClicked = async(type, term, appID) => {
         }
     })
     game.increment('totalTimesClicked');
-    gSIncrement.increment(`searchGamestimesClicked`);
+    gSIncrement.increment(`searchGamesTimesClicked`);
     return gSIncrement;
 }
 
@@ -87,7 +87,7 @@ var gameSearchStoreLinkClicked = async(type, term, appID) => {
         }
     })
     game.increment('totalSteamStoreLinkClicked');
-    gSIncrement.increment(`searchGamessteamStoreLinkClicked`);
+    gSIncrement.increment(`searchGamesSteamStoreLinkClicked`);
     return gSIncrement;
 }
 

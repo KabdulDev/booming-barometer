@@ -42,7 +42,8 @@ var games = sequelize.define('game', {
 });
 
 
-var getGameNames = async (gName) => {
+var getGameNames = async (gName, displayNum) => {
+    let count = (displayNum === null) ? 10 : displayNum;
     games.sync();
     let gameNames = await games.findAll({
         where: {
@@ -50,7 +51,8 @@ var getGameNames = async (gName) => {
             [Op.substring]:gName
             }
         }       
-    })
+    },{ limit: count}
+    )
     return gameNames;
 }
 
