@@ -6,17 +6,30 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import axios from 'axios';
 
 
 
-export default class Info extends Component
+export default class Search extends Component
 {
 
-    handleOnSubmit = (e) =>
+    handleOnSubmit = async (e) =>
     {
         e.preventDefault();
-        const searchField = document.getElementById("searchGames").value
-        console.log(searchField)
+        
+        try
+        {
+            const response = await axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/');
+            console.log(response);
+
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+        
+        // const searchField = document.getElementById("searchGames").value
+        // console.log(searchField)
     }
 
 

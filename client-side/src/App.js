@@ -1,7 +1,8 @@
 import Navigation from "./Components/Navigation";
 import Footer from './Components/Footer'
 import Home from "./Views/Home";
-import Info from "./Views/Info";
+import Search from "./Views/Search";
+import Game from "./Views/Game";
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
                     <Route path="/" exact>
                         <Home />
                     </Route>
-                    <Route path="/info" exact>
-                        <Info />
+                    <Route path="/search" exact>
+                        <Search />
                     </Route>
+                    <Route path="/game/:id" component={Game} exact />
                 </Switch>
             </div>
             <Footer />
