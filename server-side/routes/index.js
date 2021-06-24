@@ -9,9 +9,9 @@ router.use(bodyParser.urlencoded({extended:false}));
 //local javascript modules
 var search = require(`../public/javascripts/searchTable.js`);
 var game = require(`../public/javascripts/gameTable`);
-var gameSearch = require(`../public/javascripts/gameSearches`);
-const { response } = require('../app.js');
-const { games } = require('../public/javascripts/gameTable');
+var gameSearch = require(`../public/javascripts/gameSearches`)
+var steam = require(`../public/javascripts/steamCalls`);
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,7 +27,20 @@ router.get(`/games/term=:gName/limit=:limit`, async function (req, res) {
     if(err){
       console.log(err.stack);
     }
-  console.log(result.rows);
+  console.log(results.rows);
+  res.send(games);
+  })
+})
+
+router.get(`/games/term=:gName/limit=nolimit`, async function (req, res) {
+  let gName = req.params.gName;
+  console.log(`Request received for /games/term=${gName}/limit=${limit}`);
+
+  const games = await game.getGameNamesNoLimit(gName,function(err, results){
+    if(err){
+      console.log(err.stack);
+    }
+  console.log(results.rows);
   res.send(games);
   })
 })
@@ -40,7 +53,7 @@ router.get(`/game/name=:gName`, async function (req, res) {
     if(err){
       console.log(err.stack);
     }
-  console.log(result.rows);
+  console.log(results.rows);
   res.send(gameOne);
   })
 })
@@ -53,7 +66,20 @@ router.get(`/game/id=:appId`, async function (req, res) {
     if(err){
       console.log(err.stack);
     }
-  console.log(result.rows);
+  console.log(results.rows);
+  res.send(gameOne);
+  })
+})
+
+router.get(`/game/steam/id=:appId`, async function (req, res) {
+  let appId = req.params.appId;
+  console.log(`Request received for /game/steam${appId}`);
+
+  const gameOne = await steam.steamSearchId(appId, function(err, results){
+    if(err){
+      console.log(err.stack);
+    }
+  console.log(results.rows);
   res.send(gameOne);
   })
 })

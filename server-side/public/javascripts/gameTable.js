@@ -56,6 +56,18 @@ var getGameNames = async (gName, displayNum) => {
     return gameNames;
 }
 
+var getGameNamesNoLimit = async (gName) => {
+    games.sync();
+    let gameNames = await games.findAll({
+        where: {
+            name: {
+            [Op.substring]:gName
+            }
+        }       
+    })
+    return gameNames;
+}
+
 var getGameName = async (gName) => {
     games.sync();
     let gameName = await games.findOne({
@@ -102,6 +114,7 @@ module.exports = {
     seshBegin: seshBegin,
     games: games,
     getGameNames: getGameNames,
+    getGameNamesNoLimit: getGameNamesNoLimit,
     getGameName: getGameName,
     getGameAppID: getGameAppID,
     gameLinkClicked: gameLinkClicked,
