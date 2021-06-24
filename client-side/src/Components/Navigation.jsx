@@ -16,7 +16,7 @@ export default class Navigation extends Component
     {
         return (
             
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" className="navi">
                     <Container>
 
                     <Navbar.Brand href=""><HubotIcon size={24} /></Navbar.Brand>

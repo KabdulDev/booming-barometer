@@ -3,6 +3,18 @@
     padding: 2.5rem 12.5rem;
     background-color: #e6e6e6;
     border-radius: .5rem;
+    animation-name: jumbo;
+    animation-duration: 3s;
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes jumbo
+{
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
 }
 
 .container h2
