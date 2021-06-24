@@ -1,5 +1,4 @@
 import Navigation from "./Components/Navigation";
-import Footer from './Components/Footer'
 import Home from "./Views/Home";
 import Search from "./Views/Search";
 import Game from "./Views/Game";
@@ -10,26 +9,23 @@ function App() {
     return (
         <Router>
             <Navigation />
-            <div className="vh-100">
                 <Switch>
 
-                    <Route path="/" exact>
-                        <Home />
-                    </Route>
+                <Route path="/" exact>
+                    <Home />
+                </Route>
 
-                    <Route path="/search" exact>
-                        <Search />
-                    </Route>
+                <Route path="/search" exact>
+                    <Search />
+                </Route>
 
-                    <Route path="/analytics" exact>
-                        <GamesAnalytics />
-                    </Route>
+                <Route path="/analytics" exact>
+                    <GamesAnalytics />
+                </Route>
 
-                    <Route path="/game/:id" component={Game} exact />
+                <Route path="/game/:id" component={Game} exact />
                     
-                </Switch>
-            </div>
-            <Footer />
+            </Switch>
     </Router>
 
 

@@ -36,8 +36,7 @@ export default class Search extends Component
     render()
     {
         return (
-
-            <Container className="mt-5">
+            <Container className="mt-5 d-flex flex-column vh-100">
                 <Jumbotron className="mt-5">
                     <h1>Search by Game</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
@@ -86,9 +85,13 @@ export default class Search extends Component
                             <td colSpan="2">Larry the Bird</td>
                             <td>@twitter</td>
                         </tr>
+                        
                     </tbody>
                 </Table>
+                
             </Container>
+
+            
 
         )
     }

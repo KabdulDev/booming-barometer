@@ -38,3 +38,19 @@
 {
     color: white;
 }
+
+.store
+{
+    width: 5rem;
+    height: 3rem;
+    background: url('./steam.ico') no-repeat;
+    background-size: contain;
+}
+
+@media (max-width: 876px)
+{
+    .jumbotron
+    {
+        padding: 1rem 1rem;
+    }
+}
