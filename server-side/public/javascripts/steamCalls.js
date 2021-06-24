@@ -47,6 +47,7 @@ async function searchGames(name) {
 
 async function steamSearchId( id) {
     const game = await axios.get(`http://store.steampowered.com/api/appdetails/?appids=${id}`)
+    console.log(game);
     return game;
 }
 
@@ -56,4 +57,5 @@ module.exports = {
     steamSearchId:steamSearchId
 
 }
+// steamSearchId(1151640)
 // searchGames("Abadoned")

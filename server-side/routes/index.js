@@ -73,15 +73,17 @@ router.get(`/game/id=:appId`, async function (req, res) {
 
 router.get(`/game/steam/id=:appId`, async function (req, res) {
   let appId = req.params.appId;
-  console.log(`Request received for /game/steam${appId}`);
+  console.log(`Request received for /game/steam/id=${appId}`);
 
   const gameOne = await steam.steamSearchId(appId, function(err, results){
     if(err){
       console.log(err.stack);
     }
   console.log(results.rows);
-  res.send(gameOne);
   })
+  res.send(gameOne.data);
+  // console.log(gameOne.data)
+  // res.send({})
 })
 
 router.post(`/searchtype=:type/term=:term`, function (req, res){

@@ -1,14 +1,12 @@
 require(`dotenv`).config();
 
 var Sequelize = require (`sequelize`);
-var gt = require(`./gameTable`);
-var st = require(`./searchTable`);
+var gamesT = require(`./gameTable`);
+var searchT = require(`./searchTable`);
+var gameSearchT = require(`./gameSearches`);
 
 gt.seshBegin();
 
-let games = gt.games;
-let searches = st.searches;
 
-games.belongsToMany(searches, { through: `GameSearches`});
-searches.belongsToMany(gams, {through: `GameSearches`});
+
 
