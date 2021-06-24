@@ -9,9 +9,8 @@ function App()
         
         <Container>
             <Jumbotron className="mt-5">
-                <h1>Welcome Everyone</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
+                <h1>Steam Search Analytics</h1>
+                <p>A Steam search engine that returns game items and store checkout pages alongside other game information. This web app also gathers data and information from all users such as games clicked on, searched for and much more. This information is available for everyone to see in the Analytics page.</p>
             </Jumbotron>
 
             <h2>Do some fancy CSS and JS here with some type of effect</h2>

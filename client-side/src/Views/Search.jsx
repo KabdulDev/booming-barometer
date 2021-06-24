@@ -39,7 +39,7 @@ export default class Search extends Component
 
             <Container className="mt-5">
                 <Jumbotron className="mt-5">
-                    <h1>Welcome Everyone</h1>
+                    <h1>Search by Game</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
                 </Jumbotron>
@@ -47,7 +47,7 @@ export default class Search extends Component
                 <Form onSubmit={this.handleOnSubmit}>
                 <Row className="mt-2 mb-5 justify-content-center">
                     <Col xs={6} md={4}>
-                        <input type="text" className="form-control" placeholder="Search for (whatever)" id="searchGames"/>
+                        <input type="text" className="form-control" placeholder="Search for game" id="searchGames"/>
                     </Col>
 
                     <Col xs={2}>
