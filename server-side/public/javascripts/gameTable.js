@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var Sequelize = require (`sequelize`);
+var {Sequelize, DataTypes} = require('sequelize');
 var st = require(`./searchTable`);
 
 const DB_PASS = process.env.DB_PASS;
@@ -40,6 +40,10 @@ var games = sequelize.define('game', {
         defaultValue:0
     }
 });
+
+let associate = (models) => {
+    games.hasMany(models.search)
+}
 
 
 var getGameNames = async (gName, displayNum) => {
@@ -110,6 +114,78 @@ var gameSteamLinkClicked = async(appID) => {
     return game;
 }
 
+var addGameToDB = async (appId, name1) => {
+    // games.sync();
+    await games.create({
+        steamAppId: appId,
+        name: name1
+    })
+}
+
+//referenced https://stackoverflow.com/questions/35079286/sequelize-bulkcreate-returns-null-value-for-primary-key
+var addGamesToDB = (gamesArr) => {
+    games.sync();
+    //also referenced https://sequelize.org/master/class/lib/model.js~Model.html#static-method-bulkCreate
+    games.bulkCreate(gamesArr, {
+        fields: [`steamAppId`, `name`] 
+        }
+    );
+};
+
+// const gamesTest = [
+//     {
+//         "appid": 1014840,
+//         "name": "Heart and Axe1"
+//     },
+//     {
+//         "appid": 1014850,
+//         "name": "Iridium1",
+//         "last_modified": 1603925741,
+//         "price_change_number": 11351614
+//     },
+//     {
+//         "appid": 1014880,
+//         "name": "By Moonlight",
+//         "last_modified": 1551343594,
+//         "price_change_number": 9795476
+//     },
+//     {
+//         "appid": 1014890,
+//         "name": "Warforged",
+//         "last_modified": 1557963540,
+//         "price_change_number": 11351614
+//     },
+//     {
+//         "appid": 1014900,
+//         "name": "Hex Defense",
+//         "last_modified": 1561135786,
+//         "price_change_number": 11851060
+//     }
+
+// ]
+
+// addGamesToDB(gamesTest);
+// let gameX=gamesTest[0];
+// addGameToDB(gameX.appid, gameX.name);
+
+var customBulk = async (gamesArr) => {
+    for(const game of gamesArr)
+        if(game.appid && game.name){
+            // console.log("entered");
+            await addGameToDB(game.appid, game.name);
+            // console.log("posted");
+    }
+    
+}
+
+
+// customBulk(gamesTest);
+
+
+// gamesTest.map(ele =>{
+//     ele.assign
+// })
+
 module.exports = {
     seshBegin: seshBegin,
     games: games,
@@ -118,5 +194,8 @@ module.exports = {
     getGameName: getGameName,
     getGameAppID: getGameAppID,
     gameLinkClicked: gameLinkClicked,
-    gameSteamLinkClicked: gameSteamLinkClicked
+    gameSteamLinkClicked: gameSteamLinkClicked,
+    addGameToDB: addGameToDB,
+    addGamesToDB: addGamesToDB,
+    customBulk:customBulk
 }

@@ -1,5 +1,7 @@
 require(`dotenv`).config();
 
+const STEAM_WEB_API = process.env.STEAM_WEB_API;
+
 // Package imports
 var axios = require(`axios`);
 
@@ -51,10 +53,52 @@ async function steamSearchId( id) {
     return game;
 }
 
+async function steamAllGames () {
+    const games = [];
+    let last = 0;
+    let count = 0;
+    let have_more_results = true;
+    while(have_more_results){
+        console.log(`Receive last of ${last}`)
+        const tempG = await axios.get(`https://api.steampowered.com/IStoreService/GetAppList/v1/?key=${STEAM_WEB_API}&include_games=1&last_appid=${last}&max_results=50000`)
+        last = tempG.data.response.last_appid;
+        have_more_results= tempG.data.response.have_more_results;
+        count++;
+        console.log(`Output new last of ${last} \nHave more results is ${have_more_results} \nAPI has run ${count} times`)
+        let tempArr = tempG.data.response.apps;
+        console.log(tempArr[0]);
+        games.push(tempArr)
+    }
+    return games.flat();
+}
+
+async function steam500Games () {
+    const games = [];
+    let last = 0;
+    let count = 0;
+    let have_more_results = true;
+    
+    console.log(`Receive last of ${last}`)
+    const tempG = await axios.get(`https://api.steampowered.com/IStoreService/GetAppList/v1/?key=${STEAM_WEB_API}&include_games=1&last_appid=${last}&max_results=500`)
+    last = tempG.data.response.last_appid;
+    have_more_results= tempG.data.response.have_more_results;
+    count++;
+    console.log(`Output new last of ${last} \nHave more results is ${have_more_results} \nAPI has run ${count} times`)
+    let tempArr = tempG.data.response.apps;
+    console.log(tempArr[0]);
+    games.push(tempArr)
+    
+    return games.flat();
+}
+
+// steamAllGames();
+
 module.exports = {
     games:games,
     searchGames:searchGames,
-    steamSearchId:steamSearchId
+    steamSearchId:steamSearchId,
+    steamAllGames: steamAllGames,
+    steam500Games
 
 }
 // steamSearchId(1151640)
