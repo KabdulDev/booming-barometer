@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var {Sequelize, DataTypes, Op} = require('sequelize');
+var {Sequelize, DataTypes, Op, QueryTypes} = require('sequelize');
 var gt = require(`./gameTable`);
 
 const DB_PASS = process.env.DB_PASS;
@@ -104,12 +104,7 @@ var getSearch = async (type, term) => {
 var getTopSearch = async (num) => {
     let lim = parseInt(num,10);
     console.log(lim);
-    let search = await searches.findAll({
-        order: [
-            ['searchCount', 'DESC']
-        ]},
-        { limit : lim}
-    )
+    let search = await sequelize.query(`Select * from "searches" Order BY "searches"."searchCount" DESC LIMIT ${lim}`, {type: QueryTypes.SELECT})
     // console.log(search);
     return search;
 }

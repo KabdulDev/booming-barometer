@@ -116,7 +116,7 @@ router.get(`/search/top/num=:num`, async function (req, res){
 router.get(`/game/top/link/num=:num`, async function (req, res){
   let {num} = req.params;
   
-  console.log(`Request received for /search/top?num=${num}`);
+  console.log(`Request received for /game/top/link/num=${num}`);
 
   let tops = await g.getTopGamesClicked(num);
   console.log(tops[0]);
