@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 
-class Row extends Component
+class RowSearch extends Component
 {
     handleOnClick = async () =>
     {
@@ -33,4 +33,4 @@ class Row extends Component
     }
 }
 
-export default Row;
+export default RowSearch;
