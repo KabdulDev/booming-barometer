@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
+import RowVal from '../Components/Row'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Table from 'react-bootstrap/Table'
@@ -10,26 +11,65 @@ import axios from 'axios';
 
 
 
+
+
+
 export default class Search extends Component
 {
+
+    constructor()
+    {
+        super();
+
+        this.state =
+        {
+            values: [],
+            searchTerm: ""
+        }
+    }
 
     handleOnSubmit = async (e) =>
     {
         e.preventDefault();
+
+        const searchField = document.getElementById("searchGames").value
+        console.log(searchField)
         
         try
         {
-            const response = await axios.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/');
-            console.log(response);
-
+            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=10`);
+            console.log(response.data);
+            this.setState({values: response.data});
+            /*
+            ask Karimu what to do here with search term
+            */
         }
         catch(err)
         {
             console.log(err);
         }
         
-        // const searchField = document.getElementById("searchGames").value
-        // console.log(searchField)
+    }
+
+    
+    rows = () =>
+    {
+        const games = this.state.values;
+        
+
+        if (games.length !== 0)
+        {
+            return games.map(game => <RowVal key={game.id} name={game.name} id={game.steamAppId} />)
+        }
+        else
+        {
+            return (
+                <tr>
+                    <td>No Results Found</td>
+                    <td>Search Again</td>
+                </tr>
+            )
+        }
     }
 
 
@@ -46,7 +86,7 @@ export default class Search extends Component
                 <Form onSubmit={this.handleOnSubmit}>
                 <Row className="mt-2 mb-5 justify-content-center">
                     <Col xs={6} md={4}>
-                        <input type="text" className="form-control" placeholder="Search for game" id="searchGames"/>
+                        <input type="text" className="form-control" placeholder="Search for game(s)" id="searchGames"/>
                     </Col>
 
                     <Col xs={2}>
@@ -61,31 +101,12 @@ export default class Search extends Component
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>Game</th>
+                            <th>Steam ID</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td colSpan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        
+                        <this.rows />
                     </tbody>
                 </Table>
                 
