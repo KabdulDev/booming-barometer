@@ -23,7 +23,7 @@ function App() {
                     <GamesAnalytics />
                 </Route>
 
-                <Route path="/game/:id" component={Game} exact />
+                <Route path="/game/:search/:id" component={Game} exact />
                     
             </Switch>
     </Router>

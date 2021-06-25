@@ -8,21 +8,16 @@ class Row extends Component
 {
     handleOnClick = async () =>
     {
+        let search = this.props.search;
+        console.log(search);
         try
         {
-            await axios.post(`http://localhost:3001/searchtype=name/term=${this.props.name}/appId=${this.props.id}/gameClick`)
+            await axios.post(`http://localhost:3001/searchtype=name/term=${search}/appId=${this.props.id}/gameClick`);
         }
         catch(err)
         {
             console.log(err);
         }
-        
-
-        
-        console.log("Hello")
-        /*
-            What to do with click here
-        */
        
     }
 
@@ -31,7 +26,7 @@ class Row extends Component
         return (
 
             <tr>
-                <td><Link to={`/game/${this.props.id}`} onClick={this.handleOnClick}>{this.props.name}</Link></td>
+                <td><Link to={`/game/${this.props.search}/${this.props.id}`} onClick={this.handleOnClick}>{this.props.name}</Link></td>
                 <td>{this.props.id}</td>
             </tr>
         )
