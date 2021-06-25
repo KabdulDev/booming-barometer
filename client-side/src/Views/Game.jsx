@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import Table from 'react-bootstrap/Table'
 import Image from 'react-bootstrap/Image'
+import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from "react-bootstrap/Button";
@@ -76,9 +77,9 @@ export default class Game extends Component
         const game = this.state.game;
         console.log(game)
         return (
-            <div className="ml-5 mr-5 mt-5 game">
+            <Container className="mt-5 game">
                 <Row  className="justify-content-center">
-                    <Col xs={10} md={6} className="pt-5">
+                    <Col xs={10} md={5} className="pt-5">
                         <h2>{game.name}</h2>
                         <Table bordered variant="dark">
                             <tbody>
@@ -105,7 +106,7 @@ export default class Game extends Component
                             </tbody>
                         </Table>
                     </Col>
-                    <Col xs={8} md={6} className="pt-2 text-center">
+                    <Col xs={8} md={5} className="pt-2 text-center">
                         <div>
                             <Image src={game.header_image} rounded fluid/>
                             <p>{game.short_description}</p>
@@ -114,7 +115,7 @@ export default class Game extends Component
                     </Col>
 
                 </Row>
-            </div>
+            </Container>
         )
     }
 }

@@ -59,7 +59,7 @@
     background-size: contain;
 }
 
-@media (max-width: 876px)
+@media (max-width: 992px)
 {
     .jumbotron
     {
