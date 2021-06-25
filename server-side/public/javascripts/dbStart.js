@@ -24,7 +24,7 @@ let gameLoad = async () => {
 // }
 
 
-gameLoad();
+// gameLoad();
 // testGameLoad();
 // const gamesTest = [
 //     {
@@ -55,7 +55,6 @@ gameLoad();
 //         "last_modified": 1561135786,
 //         "price_change_number": 11851060
 //     }
-
 // ]
 
 // gamesT.customBulk(gamesTest)
