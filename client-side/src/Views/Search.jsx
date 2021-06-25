@@ -35,13 +35,15 @@ export default class Search extends Component
         const searchField = document.getElementById("searchGames").value
         console.log(searchField)
         
+        
         try
         {
-            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=10`);
+            // await axios.post(`http://localhost:3001/searchtype=name/term=${searchField}`)
+            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=nolimit`);
             console.log(response.data);
             this.setState({values: response.data});
             /*
-            ask Karimu what to do here with search term
+                ask Karimu what to do here with search term
             */
         }
         catch(err)
