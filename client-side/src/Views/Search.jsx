@@ -35,13 +35,15 @@ export default class Search extends Component
         const searchField = document.getElementById("searchGames").value
         console.log(searchField)
         
+        
         try
         {
-            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=10`);
+            await axios.post(`http://localhost:3001/searchtype=name/term=${searchField}`)
+            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=nolimit`);
             console.log(response.data);
-            this.setState({values: response.data});
+            this.setState({values: response.data, searchTerm: searchField});
             /*
-            ask Karimu what to do here with search term
+                ask Karimu what to do here with search term
             */
         }
         catch(err)
@@ -55,11 +57,12 @@ export default class Search extends Component
     rows = () =>
     {
         const games = this.state.values;
+        const searchV = this.state.searchTerm;
         
 
         if (games.length !== 0)
         {
-            return games.map(game => <RowVal key={game.id} name={game.name} id={game.steamAppId} />)
+            return games.map(game => <RowVal search={searchV} key={game.id} name={game.name} id={game.steamAppId} />)
         }
         else
         {

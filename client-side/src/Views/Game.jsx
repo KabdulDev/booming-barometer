@@ -21,7 +21,8 @@ export default class Game extends Component
         {
             id: "",
             game: {},
-            click: 0
+            click: 0,
+            searchTerm: ""
 
         }
     }
@@ -31,6 +32,7 @@ export default class Game extends Component
 
         const { match: { params } } = this.props;
         const value = params.id;
+        const search = params.search;
         
         // search for game info
         try
@@ -38,7 +40,7 @@ export default class Game extends Component
             const res = await axios.get(`http://localhost:3001/game/steam/id=${value}`);
             const game = res.data.[value].data
             
-            this.setState({game: game, id: value})
+            this.setState({game: game, id: value, searchTerm: search})
         }
         catch(err)
         {
@@ -50,13 +52,20 @@ export default class Game extends Component
 
     handleOnClick = async () =>
     {
-        let click = this.state.click
-        click = click + 1;
-        //record click and insert into backend/database
-        this.setState({click: click})
-        console.log(click)
-        const steamID = this.state.id;
-        window.open(`https://store.steampowered.com/app/${steamID}`);
+        const search = this.state.searchTerm;
+        const id = this.state.id;
+        console.log(search, id);
+        try
+        {
+            await axios.post(`http://localhost:3001/searchtype=name/term=${search}/appId=${id}/storeClick`)
+            
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+
+        window.open(`https://store.steampowered.com/app/${id}`);
     }
 
     
