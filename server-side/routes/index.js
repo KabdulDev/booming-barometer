@@ -102,6 +102,61 @@ router.get(`/game/steam/id=:appId`, async function (req, res) {
   // res.send({})
 })
 
+router.get(`/search/top/num=:num`, async function (req, res){
+  let {num} = req.params;
+  
+  console.log(`Request received for /search/top/num=${num}`);
+
+  let tops = await s.getTopSearch(num);
+  // console.log(tops[0]);
+  res.send(tops)
+
+})
+
+router.get(`/game/top/link/num=:num`, async function (req, res){
+  let {num} = req.params;
+  
+  console.log(`Request received for /search/top?num=${num}`);
+
+  let tops = await g.getTopGamesClicked(num);
+  console.log(tops[0]);
+  res.send(tops)
+
+})
+
+router.get(`/game/top/store/num=:num`, async function (req, res){
+  let {num} = req.params;
+  
+  console.log(`Request received for /search/top?num=${num}`);
+
+  let tops = await g.getTopGamesStoreClicked(num);
+  console.log(tops[0]);
+  res.send(tops)
+
+})
+
+router.get(`/game/appID=:appId/analytics/clicks/num=:num`, async function (req, res){
+  let {appId, num} = req.params;
+  
+  console.log(`Request received for /game/appID=${appId}/analytics/clicks/num=${num}`);
+
+  let tops = await gS.getTopSearchesForGameClicks(appId,num);
+  console.log(tops[0]);
+  res.send(tops)
+
+})
+
+router.get(`/game/appID=:id/analytics/store/num=:num`, async function (req, res){
+  let {id, num} = req.params;
+  
+  console.log(`Request received for /game/appID=${appId}/analytics/store/num=${num}`);
+
+  let tops = await gS.getTopSearchesForGameStore(appId,num);
+  console.log(tops[0]);
+  res.send(tops)
+
+})
+
 router.post(`/searchtype=:type/term=:term`, function (req, res){
   let type = req.params.type;
   let term = req.params.term;
@@ -109,17 +164,6 @@ router.post(`/searchtype=:type/term=:term`, function (req, res){
 
   s.searchInsertOrUpdate(type,term);
   res.send("Search Added")
-
-})
-
-router.get(`/search/top?num=:num`, async function (req, res){
-  let {num} = req.params;
-  
-  console.log(`Request received for /search/top?num=${num}`);
-
-  let tops = await s.getTopSearch();
-  console.log(tops[0]);
-  res.send(tops)
 
 })
 
