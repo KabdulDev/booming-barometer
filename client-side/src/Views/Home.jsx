@@ -7,6 +7,7 @@ function App()
 {
     return (
         
+        
         <Container>
             <Jumbotron className="mt-5">
                 <h1>Steam Search Analytics</h1>

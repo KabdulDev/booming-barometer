@@ -11,6 +11,7 @@ class Row extends Component
         /*
             What to do with click here
         */
+       
     }
 
     render()
