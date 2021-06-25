@@ -1,0 +1,29 @@
+{
+  "name": "steam-search-analytics",
+  "version": "1.0.0",
+  "description": "## A User Focused Search Analytics app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-start": "cd client-side && npm start",
+    "client-build": "cd client-side && npm run build",
+    "server-start": "cd server-side && npm start",
+    "server-build": "cd server-side && npm run build-limited",
+    "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
+    "build": "npm install && npm run server-build && npm run client-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final/issues"
+  },
+  "homepage": "https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}

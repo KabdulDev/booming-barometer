@@ -91,6 +91,26 @@ async function steam500Games () {
     return games.flat();
 }
 
+async function steamNumGames (num) {
+    const games = [];
+    num = parseInt(num);
+    let last = 0;
+    let count = 0;
+    let have_more_results = true;
+    
+    console.log(`Receive last of ${last}`)
+    const tempG = await axios.get(`https://api.steampowered.com/IStoreService/GetAppList/v1/?key=${STEAM_WEB_API}&include_games=1&last_appid=${last}&max_results=${num}`)
+    last = tempG.data.response.last_appid;
+    have_more_results= tempG.data.response.have_more_results;
+    count++;
+    console.log(`Output new last of ${last} \nHave more results is ${have_more_results} \nAPI has run ${count} times`)
+    let tempArr = tempG.data.response.apps;
+    console.log(tempArr[0]);
+    games.push(tempArr)
+    
+    return games.flat();
+}
+
 // steamAllGames();
 
 module.exports = {
@@ -98,7 +118,9 @@ module.exports = {
     searchGames:searchGames,
     steamSearchId:steamSearchId,
     steamAllGames: steamAllGames,
-    steam500Games
+    steam500Games,
+    steamNumGames
+
 
 }
 // steamSearchId(1151640)

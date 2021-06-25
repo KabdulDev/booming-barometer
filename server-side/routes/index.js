@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require(`body-parser`);
 var cors = require(`cors`);
+var path = require(`path`);
 
 router.use(cors());
 router.use(bodyParser.urlencoded({extended:false}));
+
+//referenced from https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/ to use server side to generate front end pages
+// router.use(express.static(path.resolve(__dirname, '../../client-side/')));
 
 //local javascript modules
 var s = require(`../public/javascripts/searchTable.js`);
@@ -14,9 +18,9 @@ var steam = require(`../public/javascripts/steamCalls`);
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 router.get(`/games/term=:gName`, async function (req, res) {
   let gName = req.params.gName;
@@ -191,6 +195,10 @@ router.post(`/searchtype=:type/term=:term/appId=:appId/storeClick`, function(req
   res.send("Store link click registered")
 
 });
+
+// router.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../../client-side/public', `index.html`))
+// });
 
 
 
