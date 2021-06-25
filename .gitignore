@@ -15,6 +15,7 @@
 
 # server-side exclusions
 /server-side/node_modules
+/server-side/.env
 
 # misc
 .DS_Store
