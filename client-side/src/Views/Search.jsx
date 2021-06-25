@@ -82,8 +82,9 @@ export default class Search extends Component
             <Container className="mt-5 d-flex flex-column vh-100">
                 <Jumbotron className="mt-5">
                     <h1>Search by Game</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio quo quos corporis debitis minima! Corrupti laborum architecto repudiandae nostrum error, alias voluptas sint accusamus autem aperiam necessitatibus tenetur. Maiores, vero?</p>
+                    <p>Search for any game that exists on the Steam platform. We will return to you plenty of results for you to be able to look at the game's profile page with additional information.</p>
+                    <p>Disclaimer: The term you use to search will be recorded and gathered as data, so please do not search with disturbing terms. The developers and data analysts will much appreaciate it. Just kidding, use any term you want.</p>
+                    <p>We will also be recording the game you will be clicking on taking into account the search term you have used. We will also record if you click on the Steam Store link on the game profile page.</p>
                 </Jumbotron>
                 
                 <Form onSubmit={this.handleOnSubmit}>

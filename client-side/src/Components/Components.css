@@ -20,3 +20,8 @@
     0%{ transform: translateY(-175px); }
     100%{ transform: translateY(auto); }
 }
+
+.navbar-dark .navbar-toggler
+{
+    border-color: #17a2b8;
+}
