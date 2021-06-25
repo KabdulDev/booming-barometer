@@ -99,20 +99,23 @@ var newGameSearch = async (game, search) => {
 
 var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
     // gameSearches.sync();
-    let test = await gt.getGameAppID(70);
-    console.log(`game: ${test}`)
+    let game = await gt.getGameAppID(appID);
+    console.log(`game: ${game}`)
     let search = await st.getSearch(type, term);
     console.log(`search: ${search}`)
+    if(game === null || search === null){
+        return null
+    }
     let gSIncrement = await gameSearches.findAll({
         where: {
-            gameId: test.id,
+            gameId: game.id,
             searchId: search.id
         }
     }, {limit: 1})
-    test.increment('totalTimesClicked');
+    game.increment('totalTimesClicked');
     console.log("game search: " + gSIncrement)
     if(gSIncrement.length===0){
-        let instance = await newGameSearch(test, search);
+        let instance = await newGameSearch(game, search);
         instance.increment(`searchGamesTimesClicked`);
     }
     else {
@@ -126,6 +129,9 @@ var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
     // gameSearches.sync();
     let game = await gt.getGameAppID(appID);
     let search = await st.getSearch(type, term);
+    if(game === null || search === null){
+        return null;
+    }
     let gSIncrement = await gameSearches.findAll({
         where: {
             gameId: game.id,
@@ -134,7 +140,7 @@ var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
     },{limit:1})
     game.increment('totalSteamStoreLinkClicked');
     if(gSIncrement.length===0){
-        let instance = await newGameSearch(test, search);
+        let instance = await newGameSearch(game, search);
         instance.increment(`searchGamesSteamStoreLinkClicked`);
     }
     else{
