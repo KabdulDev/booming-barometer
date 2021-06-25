@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var {Sequelize, DataTypes, Op} = require('sequelize');
+var {Sequelize, DataTypes, Op, QueryTypes} = require('sequelize');
 var st = require(`./searchTable`);
 
 const DB_PASS = process.env.DB_PASS;
@@ -177,27 +177,17 @@ var customBulk = async (gamesArr) => {
 }
 
 var getTopGamesClicked = async (num) => {
-    let games = await searches.findAll({
-        order: [
-            ['gameLinkClicked', 'DESC']
-        ]},
-        { limit : num}
-    )
+    let gamesTop = await sequelize.query(`select * from games Order BY games."totalTimesClicked" DESC Limit ${num}`, {type: QueryTypes.SELECT})
     
     // console.log(search);
-    return games;
+    return gamesTop;
 }
 
 var getTopGamesStoreClicked = async (num) => {
-    let games = await searches.findAll({
-        order: [
-            ['totalSteamStoreLinkClicked', 'DESC']
-        ]},
-        { limit : num}
-    )
+    let gamesTop = await sequelize.query(`select * from games Order BY games."totalSteamStoreLinkClicked" DESC Limit ${num}`, {type: QueryTypes.SELECT})
     
     // console.log(search);
-    return games;
+    return gamesTop;
 }
 
 

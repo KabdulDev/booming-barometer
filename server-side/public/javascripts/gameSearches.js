@@ -170,7 +170,7 @@ let joe = async () => {
     console.log(test)
 }
 
-joe();
+// joe();
 
 // getTopSearchesForGameNameClicks()
 // getTopSearchesForGameNameStore()
