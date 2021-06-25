@@ -52,32 +52,32 @@ let associate = (models) => {
     searches.hasMany(models.games)
 }
 
-var newSearch = (type, term) => {
-    searches.sync();
-    async () => {
-        await searches.create({
+var newSearch = async (type, term) => {
+    // searches.sync();
+    await searches.create({
             searchType: type,
             searchTerm: term
-        });
-    }
+    });
+
 }
 
-var searchInsertOrUpdate = (type, term) => {
-    searches.sync();
-    async () => {
-        let search = await searches.findOne({
-            where: {
-                searchType: type,
-                searchTerm: term
-            } 
-        })
-       if(search == null){
-           newSearch(type,term);
-       }
-       else {
-        search.increment('searchCount');
-       }
+var searchInsertOrUpdate = async (type, term) => {
+    // searches.sync();
+    
+    console.log(`entered with ${type} and {$term}`)
+    let search = await searches.findAll({
+        where: {
+            searchType: type,
+            searchTerm: term
+        } 
+    },{limit: 1})
+    if(search[0] == null){
+        newSearch(type,term);
     }
+    else {
+        search[0].increment('searchCount');
+    }
+    
 }
 
 var showAllSearches = async () => {
@@ -91,13 +91,14 @@ var showAllSearches = async () => {
 }
 
 var getSearch = async (type, term) => {
-    searches.sync();
+    // searches.sync();
     let search = await searches.findOne({
         where: {
             searchType: type,
             searchTerm: term
         }
     })
+    return search;
 }
 
 
