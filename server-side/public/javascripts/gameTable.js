@@ -47,37 +47,40 @@ let associate = (models) => {
 
 
 var getGameNames = async (gName, displayNum) => {
-    let count = (displayNum === null) ? 10 : displayNum;
+    // let count = (displayNum === null) ? 10 : displayNum;
     // games.sync();
     let gameNames = await games.findAll({
         where: {
-             name: { [Op.like]: `%${gName}%`}}      
-    },{ limit: count}
+             name: { [Op.iLike]: `%${gName}%`}}      
+    },{ limit: displayNum}
     )
     return gameNames;
 }
 
 var getGameNamesNoLimit = async (gName) => {
-    games.sync();
+    // games.sync();
     let gameNames = await games.findAll({
         where: {
-            name: { [Op.like]: `%${gName}%`}}             
+            name: { [Op.iLike]: `%${gName}%`}}             
     })
     return gameNames;
 }
 
 var getGameName = async (gName) => {
-    games.sync();
+    // games.sync();
     let gameName = await games.findOne({
         where: {
-            name: gName
-        }       
+            name: { [Op.iLike]: `%${gName}%`}} 
+              
     })
+    if (gameName === null){
+        gameName = {}
+    }
     return gameName;
 }
 
 var getGameAppID = async (appID) => {
-    games.sync();
+    // games.sync();
     let gameName = await games.findOne({
         where: {
             steamAppId: appID
@@ -87,7 +90,7 @@ var getGameAppID = async (appID) => {
 }
 
 var gameLinkClicked = async(appID) => {
-    games.sync();
+    // games.sync();
     let game = await games.findOne({
         where: {
             steamAppId: appID
@@ -98,7 +101,7 @@ var gameLinkClicked = async(appID) => {
 }
 
 var gameSteamLinkClicked = async(appID) => {
-    games.sync();
+    // games.sync();
     let game = await games.findOne({
         where: {
             steamAppId: appID
@@ -181,12 +184,12 @@ var customBulk = async (gamesArr) => {
 // })
 
 
-console.log("Function Tests");
-let test1 = async () => {
-    let test1 = await getGameNames("Half-Life", 10);
-    console.log(test1);
-}
-test1();
+// console.log("Function Tests");
+// let test1 = async () => {
+//     let test1 = await getGameNames("Half-Life", 10);
+//     console.log(test1);
+// }
+// test1();
 
 
 module.exports = {

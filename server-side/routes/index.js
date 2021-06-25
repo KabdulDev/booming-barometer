@@ -18,6 +18,21 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get(`/games/term=:gName`, async function (req, res) {
+  let gName = req.params.gName;
+  let limit = 10;
+  console.log(`Request received for /games/term=${gName}`);
+
+  let games = await g.getGameNames(gName,limit, function(err, results){
+    if(err){
+      console.log(err.stack);
+    }
+  // console.log(results.rows);
+  })
+  console.log(games[0]);
+  res.send(games);
+});
+
 router.get(`/games/term=:gName/limit=:limit`, async function (req, res) {
   let gName = req.params.gName;
   let limit = req.params.limit;
@@ -35,28 +50,28 @@ router.get(`/games/term=:gName/limit=:limit`, async function (req, res) {
 
 router.get(`/games/term=:gName/limit=nolimit`, async function (req, res) {
   let gName = req.params.gName;
-  console.log(`Request received for /games/term=${gName}/limit=${limit}`);
+  console.log(`Request received for /games/term=${gName}/limit=nolimit`);
 
   const games = await g.getGameNamesNoLimit(gName,function(err, results){
     if(err){
       console.log(err.stack);
     }
-  console.log(results.rows);
+  // console.log(results.rows);
   res.send(games);
   })
 })
 
 router.get(`/game/name=:gName`, async function (req, res) {
   let gName = req.params.gName;
-  console.log(`Request received for /game/${gName}`);
+  console.log(`Request received for /game/name=${gName}`);
 
-  const gameOne = await g.getGameName(gName, function(err, results){
+  const gameOne = await g.getGameNames(gName, 1, function(err, results){
     if(err){
       console.log(err.stack);
     }
-  console.log(results.rows);
-  res.send(gameOne);
   })
+  // console.log(results.rows);
+  res.send(gameOne);
 })
 
 router.get(`/game/id=:appId`, async function (req, res) {
