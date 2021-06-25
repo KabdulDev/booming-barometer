@@ -44,3 +44,8 @@ Database: (To be built and tested with psql and v2 to use dynamo db) <br>
 - Adding seperate storeLinkClicked columns for GOG and EPIC
 - Analytics on what searches are popular lead to game clicks, lead to a store click, and which searches are heavily tied with which platforms
 - Adding MetaCritic Review to tables
+
+
+## Some Helpful Deployment Resources
+
+- https://blog.codeselfstudy.com/blog/deploy-node-postgres-heroku/
