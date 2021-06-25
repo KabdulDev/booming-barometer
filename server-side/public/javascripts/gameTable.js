@@ -49,6 +49,7 @@ let associate = (models) => {
 var getGameNames = async (gName, displayNum) => {
     // let count = (displayNum === null) ? 10 : displayNum;
     // games.sync();
+    displayNnum = parseInt(displayNum);
     let gameNames = await games.findAll({
         where: {
              name: { [Op.iLike]: `%${gName}%`}}      
@@ -175,6 +176,30 @@ var customBulk = async (gamesArr) => {
     
 }
 
+var getTopGamesClicked = async (num) => {
+    let games = await searches.findAll({
+        order: [
+            ['gameLinkClicked', 'DESC']
+        ]},
+        { limit : num}
+    )
+    
+    // console.log(search);
+    return games;
+}
+
+var getTopGamesStoreClicked = async (num) => {
+    let games = await searches.findAll({
+        order: [
+            ['totalSteamStoreLinkClicked', 'DESC']
+        ]},
+        { limit : num}
+    )
+    
+    // console.log(search);
+    return games;
+}
+
 
 // customBulk(gamesTest);
 
@@ -203,5 +228,7 @@ module.exports = {
     gameSteamLinkClicked: gameSteamLinkClicked,
     addGameToDB: addGameToDB,
     addGamesToDB: addGamesToDB,
-    customBulk:customBulk
+    customBulk:customBulk,
+    getTopGamesClicked,
+    getTopGamesStoreClicked
 }

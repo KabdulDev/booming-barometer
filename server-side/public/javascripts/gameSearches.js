@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var {Sequelize, DataTypes} = require('sequelize');
+var {Sequelize, DataTypes, QueryTypes} = require('sequelize');
 var gt = require(`./gameTable`);
 var st = require(`./searchTable`);
 
@@ -70,19 +70,34 @@ let gameSearches = sequelize.define(`gameSearches`, {
 gt.games.belongsToMany(st.searches, {through: gameSearches});
 st.searches.belongsToMany(gt.games, {through: gameSearches});
 
-var getTopSearchesForGameName= async (gameName, displayNum) => {
-    let count = (displayNum === null) ? 10 : displayNum;
+var getTopSearchesForGameClicks= async (gameAppId, displayNum) => {
+    let count = (displayNum === null) ? 10 : parseInt(displayNum);
     gameSearches.sync();
-    let game = await gt.getGameName(gameName);
-    let searchReturns = await gameSearches.findAll({
-        where: {
-            gamesId: game.id
-        }
-    },{ limit: count}
-    )
+    let game = await gt.getGameAppID(gameAppId);
+    let searchReturns = await sequelize.query(`Select  "gameSearches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
+    from "gameSearches"
+    JOIN searches on searches.id = "gameSearches"."searchId" 
+    AND "gameSearches"."gameId" = ${game.id} 
+    Order by "gameSearches"."searchGamesTimesClicked" DESC
+    Limit ${count}`, {type: QueryTypes.SELECT})
 
     return searchReturns;
 }
+
+var getTopSearchesForGameStore= async (gameAppId, displayNum) => {
+    let count = (displayNum === null) ? 10 : parseInt(displayNum);
+    gameSearches.sync();
+    let game = await gt.getGameAppID(gameAppId);
+    let searchReturns = await sequelize.query(`Select  "gameSearches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
+    from "gameSearches"
+    JOIN searches on searches.id = "gameSearches"."searchId" 
+    AND "gameSearches"."gameId" = ${game.id} 
+    Order by "gameSearches"."searchGamesSteamStoreLinkedClicked" DESC
+    Limit ${count}`, {type: QueryTypes.SELECT})
+
+    return searchReturns;
+}
+
 
 var newGameSearch = async (game, search) => {
     // searches.sync();
@@ -149,17 +164,21 @@ var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
     return gSIncrement;
 }
 
-gameSearchLinkClickedInsertOrUpdate("name", "half", 70);
-// let joe = async () => {
-//     let test = await gt.getGameAppID(70)
-//     console.log(test)
-// }
+// gameSearchLinkClickedInsertOrUpdate("name", "half", 70);
+let joe = async () => {
+    let test = await getTopSearchesForGameNameClicks(1382330, 2)
+    console.log(test)
+}
 
-// joe();
+joe();
+
+// getTopSearchesForGameNameClicks()
+// getTopSearchesForGameNameStore()
 
 module.exports = {
     gameSearches: gameSearches,
-    getTopSearchesForGameName: getTopSearchesForGameName,
+    getTopSearchesForGameClicks,
+    getTopSearchesForGameStore,
     gameSearchLinkClickedInsertOrUpdate,
     gameSearchStoreLinkClickedInsertOrUpdate
 }

@@ -102,18 +102,19 @@ var getSearch = async (type, term) => {
 }
 
 var getTopSearch = async (num) => {
+    let lim = parseInt(num,10);
+    console.log(lim);
     let search = await searches.findAll({
         order: [
             ['searchCount', 'DESC']
         ]},
-        { limit : num}
+        { limit : lim}
     )
-    
     // console.log(search);
     return search;
 }
 
-getTopSearch(3);
+// getTopSearch(3);
 module.exports = {
     searches: searches,
     newSearch: newSearch,
