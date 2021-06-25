@@ -1,14 +1,64 @@
 import React, { Component } from 'react';
+import RowA from '../Components/RowAnalytics'
 import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import axios from 'axios';
-
+import axios from 'axios';
 
 
 
 export default class GamesAnalytics extends Component
 {
+    constructor()
+    {
+        super()
+
+        this.state =
+        {
+            topSearches: [],
+            topLinksClicked: [],
+            topStoreClicked: []
+        }
+    }
+
+    async componentDidMount()
+    {
+        const res1 = await axios.get(`http://localhost:3001/search/top/num=10`);
+        const res2 = await axios.get(`http://localhost:3001/game/top/link/num=10`)
+        const res3 = await axios.get(`http://localhost:3001/game/top/store/num=10`)
+
+        this.setState({ topSearches: res1.data, topLinksClicked: res2.data, topStoreClicked: res3.data})
+    }
+
+    rowsTableOne = () =>
+    {
+        const topSearch = this.state.topSearches;
+
+        return topSearch.map(search => <RowA key={search.id} term={search.searchTerm} num={search.searchCount}/>)
+    }
+
+    rowsTableTwo = () =>
+    {
+
+        const topLinks = this.state.topLinksClicked;
+
+        return topLinks.map(links => <RowA key={links.id} term={links.name} num={links.totalTimesClicked}/>)
+
+    }
+
+    rowsTableThree = () =>
+    {
+        const topStores = this.state.topStoreClicked;
+
+        return topStores.map(links => <RowA key={links.id} term={links.name} num={links.totalSteamStoreLinkClicked}/>)
+
+
+    }
+
+    
+
+
+
     render()
     {
         return(
@@ -17,22 +67,19 @@ export default class GamesAnalytics extends Component
 
                     <Col xs={10} md={6} className="pt-5">
                         <div className="text-center">
-                            <h2>Top Games Searched For</h2>
+                            <h2>Top 10 Search Terms:</h2>
                         </div>
                         <Table bordered variant="dark">
                             
                             <thead>
                                 <tr>
-                                    <th>Game</th>
-                                    <th>Searched For:</th>
+                                    <th>Search Term</th>
+                                    <th>Number of Times Searched For:</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>List Games</td>
-                                    <td>1</td>
-                                </tr>
+                                <this.rowsTableOne />
                             </tbody>
                         </Table>
                     </Col>
@@ -43,7 +90,7 @@ export default class GamesAnalytics extends Component
 
                     <Col xs={10} md={6} className="pt-5">
                         <div className="text-center">
-                            <h2>Top Games Clicked On</h2>
+                            <h2>Top 10 Games Clicked On</h2>
                         </div>
                         <Table bordered variant="dark">
                             
@@ -55,10 +102,7 @@ export default class GamesAnalytics extends Component
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>List Games</td>
-                                    <td>1</td>
-                                </tr>
+                                <this.rowsTableTwo />
                             </tbody>
                         </Table>
                     </Col>
@@ -81,10 +125,7 @@ export default class GamesAnalytics extends Component
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>List Games</td>
-                                    <td>1</td>
-                                </tr>
+                                <this.rowsTableThree />
                             </tbody>
                         </Table>
                     </Col>
