@@ -108,6 +108,7 @@ router.post(`/searchtype=:type/term=:term`, function (req, res){
   console.log(`Request received for /searchtype=${type}/term=${term}`);
 
   s.searchInsertOrUpdate(type,term);
+  res.send("Search Added")
 
 })
 
@@ -119,7 +120,8 @@ router.post(`/searchtype=:type/term=:term/appId=:appId/gameClick`, function(req,
   let appId = req.params.appId;
   console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
 
-  gS.gameSearchLinkClicked(type,term,appId)
+  gS.gameSearchLinkClickedInsertOrUpdate(type,term,appId)
+  res.send("Link click registered")
 
 });
 
@@ -130,7 +132,8 @@ router.post(`/searchtype=:type/term=:term/appId=:appId/storeClick`, function(req
   let appId = req.params.appId;
   console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
 
-  gS.gameSearchStoreLinkClicked(type,term,appId)
+  gS.gameSearchStoreLinkClickedInsertOrUpdate(type,term,appId);
+  res.send("Store link click registered")
 
 });
 

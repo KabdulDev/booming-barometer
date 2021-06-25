@@ -84,43 +84,78 @@ var getTopSearchesForGameName= async (gameName, displayNum) => {
     return searchReturns;
 }
 
-var gameSearchLinkClicked = async(type, term, appID) => {
-    gameSearches.sync();
-    let game = await gt.getGameAppId(appID);
+var newGameSearch = async (game, search) => {
+    // searches.sync();
+    // let test = await gt.getGameAppID(appID);
+    // // console.log(`game: ${test}`)
+    // let search = await st.getSearch(type, term);
+    // // console.log(`search: ${search}`)
+    await gameSearches.create({
+        gameId: game.id,
+        searchId: search.id
+    });
+
+}
+
+var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
+    // gameSearches.sync();
+    let test = await gt.getGameAppID(70);
+    console.log(`game: ${test}`)
     let search = await st.getSearch(type, term);
-    let gSIncrement = await gameSearches.findOne({
+    console.log(`search: ${search}`)
+    let gSIncrement = await gameSearches.findAll({
         where: {
-            gamesId: game.id,
+            gameId: test.id,
             searchId: search.id
         }
-    })
-    game.increment('totalTimesClicked');
-    gSIncrement.increment(`searchGamesTimesClicked`);
+    }, {limit: 1})
+    test.increment('totalTimesClicked');
+    console.log("game search: " + gSIncrement)
+    if(gSIncrement.length===0){
+        let instance = await newGameSearch(test, search);
+        instance.increment(`searchGamesTimesClicked`);
+    }
+    else {
+        gSIncrement[0].increment(`searchGamesTimesClicked`);
+    
+    }
     return gSIncrement;
 }
 
-var gameSearchStoreLinkClicked = async(type, term, appID) => {
-    gameSearches.sync();
-    let game = await gt.getGameAppId(appID);
+var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
+    // gameSearches.sync();
+    let game = await gt.getGameAppID(appID);
     let search = await st.getSearch(type, term);
-    let gSIncrement = await gameSearches.findOne({
+    let gSIncrement = await gameSearches.findAll({
         where: {
-            gamesId: game.id,
+            gameId: game.id,
             searchId: search.id
         }
-    })
+    },{limit:1})
     game.increment('totalSteamStoreLinkClicked');
-    gSIncrement.increment(`searchGamesSteamStoreLinkClicked`);
+    if(gSIncrement.length===0){
+        let instance = await newGameSearch(test, search);
+        instance.increment(`searchGamesSteamStoreLinkClicked`);
+    }
+    else{
+        gSIncrement[0].increment(`searchGamesSteamStoreLinkClicked`);
+    }
     return gSIncrement;
 }
 
-// var get
+gameSearchLinkClickedInsertOrUpdate("name", "half", 70);
+// let joe = async () => {
+//     let test = await gt.getGameAppID(70)
+//     console.log(test)
+// }
+
+// joe();
 
 module.exports = {
     gameSearches: gameSearches,
     getTopSearchesForGameName: getTopSearchesForGameName,
-    gameSearchLinkClicked: gameSearchLinkClicked,
-    gameSearchStoreLinkClicked: gameSearchStoreLinkClicked
+    gameSearchLinkClickedInsertOrUpdate,
+    gameSearchStoreLinkClickedInsertOrUpdate
 }
 
 
