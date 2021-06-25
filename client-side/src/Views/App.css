@@ -1,8 +1,20 @@
 .jumbotron
 {
-    padding: 2rem 7.5rem;
+    padding: 2.5rem 12.5rem;
     background-color: #e6e6e6;
     border-radius: .5rem;
+    animation-name: jumbo;
+    animation-duration: 3s;
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes jumbo
+{
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
 }
 
 .container h2
@@ -32,4 +44,25 @@
     color: #212529;
     background-color: #ffc107;
     border-color: #ffc107;
+}
+
+.game, .table
+{
+    color: white;
+}
+
+.store
+{
+    width: 5rem;
+    height: 3rem;
+    background: url('./steam.ico') no-repeat;
+    background-size: contain;
+}
+
+@media (max-width: 876px)
+{
+    .jumbotron
+    {
+        padding: 1rem 1rem;
+    }
 }

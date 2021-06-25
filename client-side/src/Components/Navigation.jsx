@@ -16,18 +16,18 @@ export default class Navigation extends Component
     {
         return (
             
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" className="navi">
                     <Container>
 
                     <Navbar.Brand href=""><HubotIcon size={24} /></Navbar.Brand>
                     <Nav className="mr-auto">
-                        <h3 className="nav-header">Gaming</h3>
+                        <h3 className="nav-header">Steam Analytics</h3>
                     </Nav>
 
                     <Nav className="ml-auto">
                         <Nav.Link href="/"><Button variant="outline-info">Home</Button></Nav.Link>
                         <Nav.Link href="/search"><Button variant="outline-info">Search</Button></Nav.Link>
-                        {/* <Nav.Link href="/"><Button variant="outline-info">Info</Button></Nav.Link> */}
+                        <Nav.Link href="/analytics"><Button variant="outline-info">Analytics</Button></Nav.Link>
                     </Nav>
                     
                     </Container>
