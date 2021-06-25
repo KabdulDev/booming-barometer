@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var {Sequelize, DataTypes} = require('sequelize');
+var {Sequelize, DataTypes, Op} = require('sequelize');
 var st = require(`./searchTable`);
 
 const DB_PASS = process.env.DB_PASS;
@@ -48,13 +48,10 @@ let associate = (models) => {
 
 var getGameNames = async (gName, displayNum) => {
     let count = (displayNum === null) ? 10 : displayNum;
-    games.sync();
+    // games.sync();
     let gameNames = await games.findAll({
         where: {
-            name: {
-            [Op.substring]:gName
-            }
-        }       
+             name: { [Op.like]: `%${gName}%`}}      
     },{ limit: count}
     )
     return gameNames;
@@ -64,10 +61,7 @@ var getGameNamesNoLimit = async (gName) => {
     games.sync();
     let gameNames = await games.findAll({
         where: {
-            name: {
-            [Op.substring]:gName
-            }
-        }       
+            name: { [Op.like]: `%${gName}%`}}             
     })
     return gameNames;
 }
@@ -185,6 +179,15 @@ var customBulk = async (gamesArr) => {
 // gamesTest.map(ele =>{
 //     ele.assign
 // })
+
+
+console.log("Function Tests");
+let test1 = async () => {
+    let test1 = await getGameNames("Half-Life", 10);
+    console.log(test1);
+}
+test1();
+
 
 module.exports = {
     seshBegin: seshBegin,
