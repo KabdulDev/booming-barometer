@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 
-var Sequelize = require (`sequelize`);
+var {Sequelize, DataTypes} = require('sequelize');
 var gt = require(`./gameTable`);
 var st = require(`./searchTable`);
 
@@ -11,25 +11,46 @@ const DB_NAME= process.env.DB_NAME;
 
 var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@localhost:${DB_PORT}/${DB_NAME}`)
 
+// const games = {};
+// const searches = {};
 
-gt.seshBegin();
+// // gt.seshBegin;
+//  g1= () => {
+//     let games = gt.games;
+//     games.sync();
+//     return games;
+// }
+// g1()
+// // g1.then(function(retG) {
+// //     games = retG;
+//     console.log(games)
+// // })
 
-let games = gt.games;
-let searches = st.searches;
+// const s1= () => {
+//     let searches = st.searches;
+//     searches.sync();
+//     return searches;
+// }
+// s1()
+// // s1.then(function(retS) {
+// //     searches = retS;
+//     console.log(searches)
+// // })
 
-let gameSearches = sequelize.define(`GameSearches`, {
+
+let gameSearches = sequelize.define(`gameSearches`, {
     searchId: {
         type:Sequelize.INTEGER,
         references: {
-            model: searches,
+            model: st.searches,
             key: 'id'
           }
 
     },
-    gamesId: {
+    gameId: {
         type:Sequelize.INTEGER,
         references: {
-            model: games,
+            model: gt.games,
             key: 'id'
           }
     },
@@ -44,8 +65,10 @@ let gameSearches = sequelize.define(`GameSearches`, {
     
 })
 
-games.belongsToMany(searches, {through: gameSearches});
-searches.belongsToMany(games, {through: gameSearches});
+
+
+gt.games.belongsToMany(st.searches, {through: gameSearches});
+st.searches.belongsToMany(gt.games, {through: gameSearches});
 
 var getTopSearchesForGameName= async (gameName, displayNum) => {
     let count = (displayNum === null) ? 10 : displayNum;

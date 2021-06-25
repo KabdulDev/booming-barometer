@@ -1,7 +1,6 @@
 require(`dotenv`).config();
 
-var Sequelize = require (`sequelize`);
-const { search } = require("../../routes");
+var {Sequelize, DataTypes, Op} = require('sequelize');
 var gt = require(`./gameTable`);
 
 const DB_PASS = process.env.DB_PASS;
@@ -49,6 +48,10 @@ var searches = sequelize.define('search', {
 
 });
 
+let associate = (models) => {
+    searches.hasMany(models.games)
+}
+
 var newSearch = (type, term) => {
     searches.sync();
     async () => {
@@ -81,9 +84,7 @@ var showAllSearches = async () => {
     searches.sync();
     let allSearches = await searches.findall({
         where: {
-            searchCount: {
-                [Op.gte]: 1
-            }
+            searchCount: { [Op.gte]: 1 }
         }
     })
     return allSearches;

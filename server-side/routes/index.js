@@ -7,9 +7,9 @@ router.use(cors());
 router.use(bodyParser.urlencoded({extended:false}));
 
 //local javascript modules
-var search = require(`../public/javascripts/searchTable.js`);
-var game = require(`../public/javascripts/gameTable`);
-var gameSearch = require(`../public/javascripts/gameSearches`)
+var s = require(`../public/javascripts/searchTable.js`);
+var g = require(`../public/javascripts/gameTable`);
+var gS = require(`../public/javascripts/gameSearches`)
 var steam = require(`../public/javascripts/steamCalls`);
 
 
@@ -23,20 +23,21 @@ router.get(`/games/term=:gName/limit=:limit`, async function (req, res) {
   let limit = req.params.limit;
   console.log(`Request received for /games/term=${gName}/limit=${limit}`);
 
-  const games = await game.getGameNames(gName,limit, function(err, results){
+  let games = await g.getGameNames(gName,limit, function(err, results){
     if(err){
       console.log(err.stack);
     }
-  console.log(results.rows);
-  res.send(games);
+  // console.log(results.rows);
   })
-})
+  console.log(games[0]);
+  res.send(games);
+});
 
 router.get(`/games/term=:gName/limit=nolimit`, async function (req, res) {
   let gName = req.params.gName;
   console.log(`Request received for /games/term=${gName}/limit=${limit}`);
 
-  const games = await game.getGameNamesNoLimit(gName,function(err, results){
+  const games = await g.getGameNamesNoLimit(gName,function(err, results){
     if(err){
       console.log(err.stack);
     }
@@ -49,7 +50,7 @@ router.get(`/game/name=:gName`, async function (req, res) {
   let gName = req.params.gName;
   console.log(`Request received for /game/${gName}`);
 
-  const gameOne = await game.getGameName(gName, function(err, results){
+  const gameOne = await g.getGameName(gName, function(err, results){
     if(err){
       console.log(err.stack);
     }
@@ -62,7 +63,7 @@ router.get(`/game/id=:appId`, async function (req, res) {
   let appId = req.params.appId;
   console.log(`Request received for /game/${appId}`);
 
-  const gameOne = await game.getGameAppID(appId, function(err, results){
+  const gameOne = await g.getGameAppID(appId, function(err, results){
     if(err){
       console.log(err.stack);
     }
@@ -91,7 +92,7 @@ router.post(`/searchtype=:type/term=:term`, function (req, res){
   let term = req.params.term;
   console.log(`Request received for /searchtype=${type}/term=${term}`);
 
-  search.searchInsertOrUpdate(type,term);
+  s.searchInsertOrUpdate(type,term);
 
 })
 
@@ -103,7 +104,7 @@ router.post(`/searchtype=:type/term=:term/appId=:appId/gameClick`, function(req,
   let appId = req.params.appId;
   console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
 
-  gameSearch.gameSearchLinkClicked(type,term,appId)
+  gS.gameSearchLinkClicked(type,term,appId)
 
 });
 
@@ -114,7 +115,7 @@ router.post(`/searchtype=:type/term=:term/appId=:appId/storeClick`, function(req
   let appId = req.params.appId;
   console.log(`Request received for /searchtype=${type}/term=${term}/appId${appId}`);
 
-  gameSearch.gameSearchStoreLinkClicked(type,term,appId)
+  gS.gameSearchStoreLinkClicked(type,term,appId)
 
 });
 
