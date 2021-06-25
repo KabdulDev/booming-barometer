@@ -29,10 +29,14 @@ function App()
                             />
                             <Carousel.Caption>
                             <h1>Analytics Project</h1>
+                            <br />
+                            <h5>A Steam search engine that returns a list of games with their respective Game Profile Page which will includes a button/link to redirect you to the Steam store.</h5>
+                            <br />
                             <h4>Jonathan Montoya</h4>
                             <h4>Karimu Mohammed</h4>
-                            <p>Description, intro, etc</p>
-                            <p></p>
+                            
+                            
+                            
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -43,44 +47,60 @@ function App()
                             />
                             
                             <Carousel.Caption>
-                                <h3>Goals & Constraints</h3>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam tempora in deleniti excepturi, sit nobis voluptate architecto dolorum cumque dolor suscipit ipsum, repellendus odio nesciunt et similique molestiae facere eveniet.</p>
+                                <h1>Technology Stack</h1>
+                                <br />
+                                <h4><span>Front-end:</span> HTML, CSS, JavaScript, React, Bootstrap</h4>
+                                <br />
+                                <h4><span>Back-end:</span> PostgreSQL, Sequelize</h4>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                             className="d-block w-100"
                             src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Third slide"
+                            alt="Third Slide"
                             />
-
+                            
                             <Carousel.Caption>
-                            <h3>Challenges</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                <h1>Goals:</h1>
+                                <br />
+                                <h5>Minimum Viable Product:</h5>
+                                <h5>A game name search that returns n number of elements and records in a backend database searches, games clicked and store clicks.</h5>
+                                <br />
+                                <h1>Constraints:</h1>
+                                <br />
+                                <h5>Amount of Time</h5>
+                                <h5>Scope of Project</h5>
+                                <h5>API Documentation and available APIs</h5>
+                                <h5>Lack of roadmap</h5>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                             className="d-block w-100"
                             src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Third slide"
+                            alt="Fourth Slide"
                             />
 
                             <Carousel.Caption>
-                            <h3>Accomplishments and Lessons</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            <h2>Accomplishments and Lessons</h2>
+                            <br />
+                            <h4>Met MVP for website</h4>
+                            <h4>Gain of knowledge</h4>
+                            <h4>Improvement in Communication</h4>
+                            <h4></h4>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
                             className="d-block w-100"
                             src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Third slide"
+                            alt="Fifth Slide"
                             />
 
                             <Carousel.Caption>
-                            <h3>Future Work?</h3>
-                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            <h1>Future Work?</h1>
+                            
                             </Carousel.Caption>
                         </Carousel.Item>
                         
