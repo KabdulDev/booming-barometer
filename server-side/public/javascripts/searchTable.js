@@ -101,11 +101,24 @@ var getSearch = async (type, term) => {
     return search;
 }
 
+var getTopSearch = async (num) => {
+    let search = await searches.findAll({
+        order: [
+            ['searchCount', 'DESC']
+        ]},
+        { limit : num}
+    )
+    
+    // console.log(search);
+    return search;
+}
 
+getTopSearch(3);
 module.exports = {
     searches: searches,
     newSearch: newSearch,
     searchInsertOrUpdate: searchInsertOrUpdate,
     showAllSearches: showAllSearches,
-    getSearch: getSearch
+    getSearch: getSearch,
+    getTopSearch
 }

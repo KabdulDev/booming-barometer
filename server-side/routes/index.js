@@ -112,6 +112,17 @@ router.post(`/searchtype=:type/term=:term`, function (req, res){
 
 })
 
+router.get(`/search/top?num=:num`, async function (req, res){
+  let {num} = req.params;
+  
+  console.log(`Request received for /search/top?num=${num}`);
+
+  let tops = await s.getTopSearch();
+  console.log(tops[0]);
+  res.send(tops)
+
+})
+
 //referenced https://stackoverflow.com/questions/41736413/multiple-optional-route-parameters-in-express
 //use when link is clicked from search
 router.post(`/searchtype=:type/term=:term/appId=:appId/gameClick`, function(req, res){
