@@ -10,7 +10,7 @@ class Row extends Component
     {
         try
         {
-            await axios.post(`http://localhost:3001/searchtype=/term=${this.props.name}/appId=${this.props.id}/gameClick`)
+            await axios.post(`http://localhost:3001/searchtype=name/term=${this.props.name}/appId=${this.props.id}/gameClick`)
         }
         catch(err)
         {
