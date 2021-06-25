@@ -51,13 +51,13 @@
     color: white;
 }
 
-.store
+/* .store
 {
     width: 5rem;
     height: 3rem;
     background: url('./steam.ico') no-repeat;
     background-size: contain;
-}
+} */
 
 @media (max-width: 992px)
 {

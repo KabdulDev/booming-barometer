@@ -68,8 +68,8 @@ export default class Search extends Component
         {
             return (
                 <tr>
-                    <td>No Results Found</td>
-                    <td>Search Again</td>
+                    <td>No Results</td>
+                    <td>Search</td>
                 </tr>
             )
         }
