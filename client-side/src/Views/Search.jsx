@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
-import RowVal from '../Components/Row'
+import RowSearch from '../Components/RowSearch'
 import Container from 'react-bootstrap/Container'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Table from 'react-bootstrap/Table'
@@ -62,7 +62,7 @@ export default class Search extends Component
 
         if (games.length !== 0)
         {
-            return games.map(game => <RowVal search={searchV} key={game.id} name={game.name} id={game.steamAppId} />)
+            return games.map(game => <RowSearch search={searchV} key={game.id} name={game.name} id={game.steamAppId} />)
         }
         else
         {
