@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final.git"
+    "url": "git+https://github.com/KabdulDev/booming-barometer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final/issues"
+    "url": "https://github.com/KabdulDev/booming-barometer/issues"
   },
-  "homepage": "https://github.com/lehman-cuny2x/final-project-listenfirstcohort6final#readme",
+  "homepage": "https://github.com/KabdulDev/booming-barometer#readme",
   "dependencies": {
     "concurrently": "^6.2.0"
   }

@@ -88,7 +88,7 @@ function App()
                             <h4>Met MVP for website</h4>
                             <h4>Gain of knowledge</h4>
                             <h4>Improvement in Communication</h4>
-                            <h4></h4>
+                            
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
