@@ -7,8 +7,9 @@ const DB_PASS = process.env.DB_PASS;
 const DB_PORT= process.env.DB_PORT;
 const DB_USER= process.env.DB_USER;
 const DB_NAME= process.env.DB_NAME;
+const DB_SERVER = process.env.DB_SERVER;
 
-var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@localhost:${DB_PORT}/${DB_NAME}`)
+var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`);
 
 var seshBegin = () => {
     try {
