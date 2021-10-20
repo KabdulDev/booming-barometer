@@ -3,12 +3,12 @@ require(`dotenv`).config();
 var Sequelize = require (`sequelize`);
 var gamesT = require(`./gameTable`);
 var searchT = require(`./searchTable`);
-var gameSearchT = require(`./gameSearches`);
+var gameSearchT = require(`./game_searches`);
 var steam = require(`./steamCalls`);
 
 gamesT.games.sync();
 searchT.searches.sync();
-gameSearchT.gameSearches.sync();
+gameSearchT.game_searches.sync();
 
 let gameLoad = async () => {
     let games = await steam.steamAllGames();

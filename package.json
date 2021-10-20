@@ -10,7 +10,9 @@
     "server-start": "cd server-side && npm start",
     "server-build": "cd server-side && npm run build-limited",
     "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
-    "build": "npm install && npm run server-build && npm run client-build"
+    "build": "npm install && npm run server-build && npm run client-build",
+    "db:build": "node server-side/public/javascripts/dbStart.js",
+    "db:build-9000": "node server-side/public/javascripts/dbStartDeploy.js"
   },
   "repository": {
     "type": "git",

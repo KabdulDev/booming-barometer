@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({extended:false}));
 //local javascript modules
 var s = require(`../public/javascripts/searchTable.js`);
 var g = require(`../public/javascripts/gameTable`);
-var gS = require(`../public/javascripts/gameSearches`)
+var gS = require(`../public/javascripts/game_searches`)
 var steam = require(`../public/javascripts/steamCalls`);
 
 

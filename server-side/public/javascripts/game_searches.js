@@ -38,7 +38,7 @@ var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@localhost:${DB_P
 // // })
 
 
-let gameSearches = sequelize.define(`gameSearches`, {
+let game_searches = sequelize.define(`game_searches`, {
     searchId: {
         type:Sequelize.INTEGER,
         references: {
@@ -56,7 +56,7 @@ let gameSearches = sequelize.define(`gameSearches`, {
     },
     searchGamesTimesClicked: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 1
     },
     searchGamesSteamStoreLinkClicked: {
         type: Sequelize.INTEGER,
@@ -66,19 +66,20 @@ let gameSearches = sequelize.define(`gameSearches`, {
 })
 
 
+game_searches.sync();
+gt.games.belongsToMany(st.searches, {through: game_searches});
+st.searches.belongsToMany(gt.games, {through: game_searches});
 
-gt.games.belongsToMany(st.searches, {through: gameSearches});
-st.searches.belongsToMany(gt.games, {through: gameSearches});
 
 var getTopSearchesForGameClicks= async (gameAppId, displayNum) => {
     let count = (displayNum === null) ? 10 : parseInt(displayNum);
-    gameSearches.sync();
+    game_searches.sync();
     let game = await gt.getGameAppID(gameAppId);
-    let searchReturns = await sequelize.query(`Select  "gameSearches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
-    from "gameSearches"
-    JOIN searches on searches.id = "gameSearches"."searchId" 
-    AND "gameSearches"."gameId" = ${game.id} 
-    Order by "gameSearches"."searchGamesTimesClicked" DESC
+    let searchReturns = await sequelize.query(`Select  "game_searches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
+    from "game_searches"
+    JOIN searches on searches.id = "game_searches"."searchId" 
+    AND "game_searches"."gameId" = ${game.id} 
+    Order by "game_searches"."searchGamesTimesClicked" DESC
     Limit ${count}`, {type: QueryTypes.SELECT})
 
     return searchReturns;
@@ -86,13 +87,13 @@ var getTopSearchesForGameClicks= async (gameAppId, displayNum) => {
 
 var getTopSearchesForGameStore= async (gameAppId, displayNum) => {
     let count = (displayNum === null) ? 10 : parseInt(displayNum);
-    gameSearches.sync();
+    game_searches.sync();
     let game = await gt.getGameAppID(gameAppId);
-    let searchReturns = await sequelize.query(`Select  "gameSearches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
-    from "gameSearches"
-    JOIN searches on searches.id = "gameSearches"."searchId" 
-    AND "gameSearches"."gameId" = ${game.id} 
-    Order by "gameSearches"."searchGamesSteamStoreLinkedClicked" DESC
+    let searchReturns = await sequelize.query(`Select  "game_searches"."searchGamesTimesClicked", searches."searchTerm", searches."searchCount"
+    from "game_searches"
+    JOIN searches on searches.id = "game_searches"."searchId" 
+    AND "game_searches"."gameId" = ${game.id} 
+    Order by "game_searches"."searchGamesSteamStoreLinkedClicked" DESC
     Limit ${count}`, {type: QueryTypes.SELECT})
 
     return searchReturns;
@@ -105,7 +106,7 @@ var newGameSearch = async (game, search) => {
     // // console.log(`game: ${test}`)
     // let search = await st.getSearch(type, term);
     // // console.log(`search: ${search}`)
-    await gameSearches.create({
+    await game_searches.create({
         gameId: game.id,
         searchId: search.id
     });
@@ -113,7 +114,7 @@ var newGameSearch = async (game, search) => {
 }
 
 var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
-    // gameSearches.sync();
+    // game_searches.sync();
     let game = await gt.getGameAppID(appID);
     console.log(`game: ${game}`)
     let search = await st.getSearch(type, term);
@@ -121,7 +122,7 @@ var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
     if(game === null || search === null){
         return null
     }
-    let gSIncrement = await gameSearches.findAll({
+    let gSIncrement = await game_searches.findAll({
         where: {
             gameId: game.id,
             searchId: search.id
@@ -130,8 +131,7 @@ var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
     game.increment('totalTimesClicked');
     console.log("game search: " + gSIncrement)
     if(gSIncrement.length===0){
-        let instance = await newGameSearch(game, search);
-        instance.increment(`searchGamesTimesClicked`);
+        newGameSearch(game, search);
     }
     else {
         gSIncrement[0].increment(`searchGamesTimesClicked`);
@@ -141,13 +141,13 @@ var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
 }
 
 var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
-    // gameSearches.sync();
+    // game_searches.sync();
     let game = await gt.getGameAppID(appID);
     let search = await st.getSearch(type, term);
     if(game === null || search === null){
         return null;
     }
-    let gSIncrement = await gameSearches.findAll({
+    let gSIncrement = await game_searches.findAll({
         where: {
             gameId: game.id,
             searchId: search.id
@@ -155,8 +155,7 @@ var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
     },{limit:1})
     game.increment('totalSteamStoreLinkClicked');
     if(gSIncrement.length===0){
-        let instance = await newGameSearch(game, search);
-        instance.increment(`searchGamesSteamStoreLinkClicked`);
+        newGameSearch(game, search);
     }
     else{
         gSIncrement[0].increment(`searchGamesSteamStoreLinkClicked`);
@@ -176,7 +175,7 @@ let joe = async () => {
 // getTopSearchesForGameNameStore()
 
 module.exports = {
-    gameSearches: gameSearches,
+    game_searches: game_searches,
     getTopSearchesForGameClicks,
     getTopSearchesForGameStore,
     gameSearchLinkClickedInsertOrUpdate,

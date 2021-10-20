@@ -13,10 +13,15 @@ var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@localhost:${DB_P
 var seshBegin = () => {
     try {
         sequelize.authenticate();
-        console.log("Connection has been established")
+        console.log(`
+        Current DB Pass is : ${DB_PASS}\n
+        Current DB Port is : ${DB_PORT}\n
+        Current DB User is : ${DB_USER}\n
+        Current DB Name is : ${DB_NAME}\n
+        Connection has been established\n`)
     }
     catch(er){
-        console.log("Error attempting authentication: ", er)
+        console.log(`Error attempting authentication: `, er)
     }
 }
 
