@@ -9,7 +9,13 @@ const DB_USER= process.env.DB_USER;
 const DB_NAME= process.env.DB_NAME;
 const DB_SERVER = process.env.DB_SERVER;
 
-var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`);
+var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`,{
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true
+    }
+});
+  
 
 var seshBegin = () => {
     try {
