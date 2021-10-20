@@ -12,8 +12,11 @@ const DB_SERVER = process.env.DB_SERVER;
 var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`,{
     dialect: 'postgres',
     dialectOptions: {
-      ssl: true
-    }
+        ssl: {
+            require: true,
+            rejectUnauthorized: false 
+          }
+        }
 });
   
 
@@ -60,7 +63,6 @@ let associate = (models) => {
 }
 
 var newSearch = async (type, term) => {
-    // searches.sync();
     await searches.create({
             searchType: type,
             searchTerm: term
@@ -98,7 +100,6 @@ var showAllSearches = async () => {
 }
 
 var getSearch = async (type, term) => {
-    // searches.sync();
     let search = await searches.findOne({
         where: {
             searchType: type,
@@ -112,11 +113,9 @@ var getTopSearch = async (num) => {
     let lim = parseInt(num,10);
     console.log(lim);
     let search = await sequelize.query(`Select * from "searches" Order BY "searches"."searchCount" DESC LIMIT ${lim}`, {type: QueryTypes.SELECT})
-    // console.log(search);
     return search;
 }
 
-// getTopSearch(3);
 module.exports = {
     searches: searches,
     newSearch: newSearch,

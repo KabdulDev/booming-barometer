@@ -23,9 +23,9 @@ export default class GamesAnalytics extends Component
 
     async componentDidMount()
     {
-        const res1 = await axios.get(`http://localhost:3001/search/top/num=10`);
-        const res2 = await axios.get(`http://localhost:3001/game/top/link/num=10`)
-        const res3 = await axios.get(`http://localhost:3001/game/top/store/num=10`)
+        const res1 = await axios.get(`/search/top/num=10`);
+        const res2 = await axios.get(`/game/top/link/num=10`)
+        const res3 = await axios.get(`/game/top/store/num=10`)
 
         this.setState({ topSearches: res1.data, topLinksClicked: res2.data, topStoreClicked: res3.data})
     }

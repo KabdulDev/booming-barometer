@@ -38,7 +38,7 @@ export default class Game extends Component
         // search for game info
         try
         {
-            const res = await axios.get(`http://localhost:3001/game/steam/id=${value}`);
+            const res = await axios.get(`/game/steam/id=${value}`);
             const game = res.data.[value].data
             
             this.setState({game: game, id: value, searchTerm: search})
@@ -58,7 +58,7 @@ export default class Game extends Component
         console.log(search, id);
         try
         {
-            await axios.post(`http://localhost:3001/searchtype=name/term=${search}/appId=${id}/storeClick`)
+            await axios.post(`/searchtype=name/term=${search}/appId=${id}/storeClick`)
             
         }
         catch(error)

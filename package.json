@@ -12,7 +12,8 @@
     "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
     "build": "npm install && npm run server-build && npm run client-build",
     "db:build": "node server-side/public/javascripts/dbStart.js",
-    "db:build-9000": "node server-side/public/javascripts/dbStartDeploy.js"
+    "db:build-9000": "node server-side/public/javascripts/dbStartDeploy.js",
+    "production": "node server-side/bin/www"
   },
   "repository": {
     "type": "git",

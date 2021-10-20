@@ -17,10 +17,7 @@ var gS = require(`../public/javascripts/game_searches`)
 var steam = require(`../public/javascripts/steamCalls`);
 
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+
 
 router.get(`/games/term=:gName`, async function (req, res) {
   let gName = req.params.gName;

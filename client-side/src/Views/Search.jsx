@@ -38,8 +38,8 @@ export default class Search extends Component
         
         try
         {
-            await axios.post(`http://localhost:3001/searchtype=name/term=${searchField}`)
-            const response = await axios.get(`http://localhost:3001/games/term=${searchField}/limit=nolimit`);
+            await axios.post(`/searchtype=name/term=${searchField}`)
+            const response = await axios.get(`/games/term=${searchField}/limit=nolimit`);
             console.log(response.data);
             this.setState({values: response.data, searchTerm: searchField});
             /*

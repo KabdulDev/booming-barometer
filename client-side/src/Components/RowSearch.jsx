@@ -12,7 +12,7 @@ class RowSearch extends Component
         console.log(search);
         try
         {
-            await axios.post(`http://localhost:3001/searchtype=name/term=${search}/appId=${this.props.id}/gameClick`);
+            await axios.post(`/searchtype=name/term=${search}/appId=${this.props.id}/gameClick`);
         }
         catch(err)
         {

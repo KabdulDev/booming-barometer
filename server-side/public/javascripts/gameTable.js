@@ -12,7 +12,10 @@ const DB_SERVER = process.env.DB_SERVER;
 var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`,{
     dialect: 'postgres',
     dialectOptions: {
-      ssl: true
+      ssl: {
+        require: true,
+        rejectUnauthorized: false 
+      }
     }
 });
 
@@ -58,8 +61,7 @@ let associate = (models) => {
 
 
 var getGameNames = async (gName, displayNum) => {
-    // let count = (displayNum === null) ? 10 : displayNum;
-    // games.sync();
+
     displayNnum = parseInt(displayNum);
     let gameNames = await games.findAll({
         where: {
@@ -70,7 +72,6 @@ var getGameNames = async (gName, displayNum) => {
 }
 
 var getGameNamesNoLimit = async (gName) => {
-    // games.sync();
     let gameNames = await games.findAll({
         where: {
             name: { [Op.iLike]: `%${gName}%`}}             
@@ -79,7 +80,6 @@ var getGameNamesNoLimit = async (gName) => {
 }
 
 var getGameName = async (gName) => {
-    // games.sync();
     let gameName = await games.findOne({
         where: {
             name: { [Op.iLike]: `%${gName}%`}} 
@@ -92,7 +92,6 @@ var getGameName = async (gName) => {
 }
 
 var getGameAppID = async (appID) => {
-    // games.sync();
     let gameName = await games.findOne({
         where: {
             steamAppId: appID
@@ -102,7 +101,6 @@ var getGameAppID = async (appID) => {
 }
 
 var gameLinkClicked = async(appID) => {
-    // games.sync();
     let game = await games.findOne({
         where: {
             steamAppId: appID
@@ -113,7 +111,6 @@ var gameLinkClicked = async(appID) => {
 }
 
 var gameSteamLinkClicked = async(appID) => {
-    // games.sync();
     let game = await games.findOne({
         where: {
             steamAppId: appID
@@ -124,7 +121,6 @@ var gameSteamLinkClicked = async(appID) => {
 }
 
 var addGameToDB = async (appId, name1) => {
-    // games.sync();
     await games.create({
         steamAppId: appId,
         name: name1
@@ -141,48 +137,11 @@ var addGamesToDB = (gamesArr) => {
     );
 };
 
-// const gamesTest = [
-//     {
-//         "appid": 1014840,
-//         "name": "Heart and Axe1"
-//     },
-//     {
-//         "appid": 1014850,
-//         "name": "Iridium1",
-//         "last_modified": 1603925741,
-//         "price_change_number": 11351614
-//     },
-//     {
-//         "appid": 1014880,
-//         "name": "By Moonlight",
-//         "last_modified": 1551343594,
-//         "price_change_number": 9795476
-//     },
-//     {
-//         "appid": 1014890,
-//         "name": "Warforged",
-//         "last_modified": 1557963540,
-//         "price_change_number": 11351614
-//     },
-//     {
-//         "appid": 1014900,
-//         "name": "Hex Defense",
-//         "last_modified": 1561135786,
-//         "price_change_number": 11851060
-//     }
-
-// ]
-
-// addGamesToDB(gamesTest);
-// let gameX=gamesTest[0];
-// addGameToDB(gameX.appid, gameX.name);
 
 var customBulk = async (gamesArr) => {
     for(const game of gamesArr)
         if(game.appid && game.name){
-            // console.log("entered");
             await addGameToDB(game.appid, game.name);
-            // console.log("posted");
     }
     
 }
@@ -190,32 +149,16 @@ var customBulk = async (gamesArr) => {
 var getTopGamesClicked = async (num) => {
     let gamesTop = await sequelize.query(`select * from games Order BY games."totalTimesClicked" DESC Limit ${num}`, {type: QueryTypes.SELECT})
     
-    // console.log(search);
     return gamesTop;
 }
 
 var getTopGamesStoreClicked = async (num) => {
     let gamesTop = await sequelize.query(`select * from games Order BY games."totalSteamStoreLinkClicked" DESC Limit ${num}`, {type: QueryTypes.SELECT})
     
-    // console.log(search);
     return gamesTop;
 }
 
 
-// customBulk(gamesTest);
-
-
-// gamesTest.map(ele =>{
-//     ele.assign
-// })
-
-
-// console.log("Function Tests");
-// let test1 = async () => {
-//     let test1 = await getGameNames("Half-Life", 10);
-//     console.log(test1);
-// }
-// test1();
 
 
 module.exports = {

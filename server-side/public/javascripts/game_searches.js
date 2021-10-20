@@ -13,36 +13,15 @@ const DB_SERVER = process.env.DB_SERVER;
 var sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_SERVER}:${DB_PORT}/${DB_NAME}`,{
     dialect: 'postgres',
     dialectOptions: {
-      ssl: true
-    }
+        ssl: {
+            require: true,
+            rejectUnauthorized: false 
+          }
+        }
 });
 
 
-// const games = {};
-// const searches = {};
 
-// // gt.seshBegin;
-//  g1= () => {
-//     let games = gt.games;
-//     games.sync();
-//     return games;
-// }
-// g1()
-// // g1.then(function(retG) {
-// //     games = retG;
-//     console.log(games)
-// // })
-
-// const s1= () => {
-//     let searches = st.searches;
-//     searches.sync();
-//     return searches;
-// }
-// s1()
-// // s1.then(function(retS) {
-// //     searches = retS;
-//     console.log(searches)
-// // })
 
 
 let game_searches = sequelize.define(`game_searches`, {
@@ -108,11 +87,7 @@ var getTopSearchesForGameStore= async (gameAppId, displayNum) => {
 
 
 var newGameSearch = async (game, search) => {
-    // searches.sync();
-    // let test = await gt.getGameAppID(appID);
-    // // console.log(`game: ${test}`)
-    // let search = await st.getSearch(type, term);
-    // // console.log(`search: ${search}`)
+    
     await game_searches.create({
         gameId: game.id,
         searchId: search.id
@@ -121,7 +96,7 @@ var newGameSearch = async (game, search) => {
 }
 
 var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
-    // game_searches.sync();
+    
     let game = await gt.getGameAppID(appID);
     console.log(`game: ${game}`)
     let search = await st.getSearch(type, term);
@@ -148,7 +123,7 @@ var gameSearchLinkClickedInsertOrUpdate = async(type, term, appID) => {
 }
 
 var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
-    // game_searches.sync();
+    
     let game = await gt.getGameAppID(appID);
     let search = await st.getSearch(type, term);
     if(game === null || search === null){
@@ -170,16 +145,13 @@ var gameSearchStoreLinkClickedInsertOrUpdate = async(type, term, appID) => {
     return gSIncrement;
 }
 
-// gameSearchLinkClickedInsertOrUpdate("name", "half", 70);
+
 let joe = async () => {
     let test = await getTopSearchesForGameNameClicks(1382330, 2)
     console.log(test)
 }
 
-// joe();
 
-// getTopSearchesForGameNameClicks()
-// getTopSearchesForGameNameStore()
 
 module.exports = {
     game_searches: game_searches,
