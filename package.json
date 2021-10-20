@@ -8,7 +8,7 @@
     "client-start": "cd client-side && npm start",
     "client-build": "cd client-side && npm run install && npm run build",
     "server-start": "cd server-side && npm start",
-    "server-build": "cd server-side && npm run build-limited",
+    "server-build": "cd server-side && npm run build",
     "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
     "build": "npm install && npm run server-build && npm run client-build",
     "db:build": "node server-side/public/javascripts/dbStart.js",
