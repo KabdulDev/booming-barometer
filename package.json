@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-start": "cd client-side && npm start",
-    "client-build": "cd client-side && npm run install && npm run build",
+    "client-build": "cd client-side && npm install && npm run build",
     "server-start": "cd server-side && npm start",
     "server-build": "cd server-side && npm run build",
     "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
