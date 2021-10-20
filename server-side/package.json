@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "start-trace": "nodemon --trace-warnings ./bin/www",
-    "build-limited": "npm install && node public/javascripts/dbStartDeploy.js"
+    "build": "npm install",
+    "db:build-limited": "node public/javascripts/dbStartDeploy.js",
+    "db:build": "node public/javascripts/dbStart.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
