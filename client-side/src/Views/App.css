@@ -1,0 +1,68 @@
+.jumbotron
+{
+    padding: 2.5rem 12.5rem;
+    background-color: #e6e6e6;
+    border-radius: .5rem;
+    animation-name: jumbo;
+    animation-duration: 3s;
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes jumbo
+{
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
+}
+
+.container h2
+{
+    color: white;
+}
+
+.btn-search
+{
+    color: #ffc107;
+    border-color: #ffc107;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-search:hover
+{
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.game, .table
+{
+    color: white;
+}
+
+/* .store
+{
+    width: 5rem;
+    height: 3rem;
+    background: url('./steam.ico') no-repeat;
+    background-size: contain;
+} */
+
+@media (max-width: 992px)
+{
+    .jumbotron
+    {
+        padding: 1rem 1rem;
+    }
+}

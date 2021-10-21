@@ -3,12 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www",
+    "start-trace": "nodemon --trace-warnings ./bin/www",
+    "build": "npm install",
+    "db:build-limited": "node public/javascripts/dbStartDeploy.js",
+    "db:build": "node public/javascripts/dbStart.js"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.2"
   }
 }

@@ -1,0 +1,27 @@
+.nav-header
+{
+    font-size: 1.5rem;
+    color: rgb(200, 200, 200);
+    padding: .25rem .25rem;
+    margin: .25rem .25rem;
+}
+
+.navi
+{
+    animation-name: navi-move;
+    animation-duration: 1500ms;
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes navi-move
+{
+    0%{ transform: translateY(-175px); }
+    100%{ transform: translateY(auto); }
+}
+
+.navbar-dark .navbar-toggler
+{
+    border-color: #17a2b8;
+}

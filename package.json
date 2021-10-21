@@ -1,0 +1,32 @@
+{
+  "name": "steam-search-analytics",
+  "version": "1.0.0",
+  "description": "## A User Focused Search Analytics app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-start": "cd client-side && npm start",
+    "client-build": "cd client-side && npm install && npm run build",
+    "server-start": "cd server-side && npm start",
+    "server-build": "cd server-side && npm run build",
+    "start": "concurrently \"npm run server-start\" \"npm run client-start\" ",
+    "build": "npm install && npm run server-build && npm run client-build",
+    "db:build": "node server-side/public/javascripts/dbStart.js",
+    "db:build-9000": "node server-side/public/javascripts/dbStartDeploy.js",
+    "production": "node server-side/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KabdulDev/booming-barometer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KabdulDev/booming-barometer/issues"
+  },
+  "homepage": "https://github.com/KabdulDev/booming-barometer#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
