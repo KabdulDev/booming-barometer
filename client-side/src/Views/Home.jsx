@@ -13,9 +13,9 @@ function App()
         
         <Container>
             <Jumbotron className="mt-5">
-                <h1>Steam Search Analytics</h1>
+                <h1>Booming Barometer</h1>
                 <p></p>
-                <p>This is a Steam search engine that returns a list of games and store checkout pages alongside other game information. This web app also gathers data and information from all users such as games clicked on, searched for and much more. This information is available for everyone to see in the Analytics page.</p>
+                <p>A Steam search engine that not only returns a list of games and store checkout pages, but is designed to let you know what's currently hot! This web app gathers search data and user behavior from user interaction to build an understanding of what people are looking for and where those searches take them. Check out for yourself by running a search, clicking a game, and viewing the Analytics page.</p>
             </Jumbotron>
 
             <Row className="justify-content-center mb-5">
@@ -28,81 +28,22 @@ function App()
                             alt="First slide"
                             />
                             <Carousel.Caption>
-                            <h1>Analytics Project</h1>
+                            <h3>Steam Search and Store Analytics Project</h3>
                             <br />
-                            <h5>A Steam search engine that returns a list of games with their respective Game Profile Page which will includes a button/link to redirect you to the Steam store.</h5>
+                            <h4>Built By: <a href= "https://github.com/JonTrader?tab=repositories"> Jonathan Montoya</a> and <a href= "https://github.com/KabdulDev"> Karimu Mohammed </a> </h4>
                             <br />
-                            <h4>Jonathan Montoya</h4>
-                            <h4>Karimu Mohammed</h4>
-                            
-                            
-                            
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Second slide"
-                            />
-                            
-                            <Carousel.Caption>
-                                <h1>Technology Stack</h1>
-                                <br />
-                                <h4><span>Front-end:</span> HTML, CSS, JavaScript, React, Bootstrap</h4>
-                                <br />
-                                <h4><span>Back-end:</span> PostgreSQL, Sequelize</h4>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Third Slide"
-                            />
-                            
-                            <Carousel.Caption>
-                                <h1>Goals:</h1>
-                                <br />
-                                <h5>Minimum Viable Product:</h5>
-                                <h5>A game name search that returns n number of elements and records in a backend database searches, games clicked and store clicks.</h5>
-                                <br />
-                                <h1>Constraints:</h1>
-                                <br />
-                                <h5>Amount of Time</h5>
-                                <h5>Scope of Project</h5>
-                                <h5>API Documentation and available APIs</h5>
-                                <h5>Lack of roadmap</h5>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Fourth Slide"
-                            />
+                            <h3>Technology Stack</h3>
+                            <br />
+                            <h4><span>Front-end:</span> HTML, CSS, JavaScript, React, Bootstrap</h4>
+                            <br />
+                            <h4><span>Back-end:</span> Express, PostgreSQL, Sequelize, Heroku</h4>
 
-                            <Carousel.Caption>
-                            <h2>Accomplishments and Lessons</h2>
-                            <br />
-                            <h4>Met MVP for website</h4>
-                            <h4>Gain of knowledge</h4>
-                            <h4>Improvement in Communication</h4>
+                            
+                            
                             
                             </Carousel.Caption>
                         </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="https://www.ppt-backgrounds.net/thumbs/simple-black-for-presentation--clipartsgram--photo-image.jpeg"
-                            alt="Fifth Slide"
-                            />
-
-                            <Carousel.Caption>
-                            <h1>Future Work?</h1>
-                            
-                            </Carousel.Caption>
-                        </Carousel.Item>
+                        
                         
                     </Carousel>
                 </Col>
