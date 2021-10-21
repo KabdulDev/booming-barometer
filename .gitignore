@@ -6,6 +6,7 @@
 /client-side/node_modules
 /client-side/.pnp
 /client-side/.pnp.js
+node_modules
 
 # testing
 /client-side/coverage
@@ -26,3 +27,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
